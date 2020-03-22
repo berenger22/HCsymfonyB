@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Harry Codeur{% endblock %}
+
+{% block monTitre %}Harry codeur{% endblock %}
+{% block sousTitre %}Les requetes de la mort{% endblock %}
+{% block body %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endfor %}
+{% if error %}
+<div class="alert alert-danger">
+    {{ error.messageKey | trans(error.meassagedata, 'security')}}
+</div>
+{% endif %}
+{% endblock %}

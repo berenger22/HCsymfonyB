@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Harry Codeur{% endblock %}
+
+{% block monTitre %}Harry codeur{% endblock %}
+{% block sousTitre %}Les requetes de la mort{% endblock %}
+{% block body %}
+{{form_start(form)}}
+    {{ form_row(form.lastname, {
+        "attr" : { "placeholder" : "saisir votre nom"},
+        "label" : "Votre nom :"
+    })}}
+    {{ form_row(form.firstname, {
+        "attr" : { "placeholder" : "saisir votre prénom"},
+        "label" : "Votre prénom :"
+    })}}
+    {{ form_row(form.username, {
+        "attr" : { "placeholder" : "saisir votre identifiant entre 5 et 15 caractères"},
+        "label" : "Votre identifiant :"
+    })}}
+    {{ form_row(form.email, {
+        "attr" : { "placeholder" : "saisir votre mail"},
+        "label" : "Votre mail :"
+    })}}
+    {{ form_row(form.password, {
+        "attr" : { "placeholder" : "saisir votre mot de passe"},
+        "label" : "Votre mot de passe :"
+    })}}
+    {{ form_row(form.verifPassword, {
+        "attr" : { "placeholder" : "confirmer votre mot de passe"},
+        "label" : "Confirmer Votre mot de passe :"
+    })}}
+    <div class="row">
+        <div class="col">
+            <button type="submit" class="btn btn-primary m-3">Valider</button>
+            <a href="{{path('connexion')}}" class="btn btn-warning m">Retour</a>                 
+        </div>  
+    </div>
+{{form_end(form)}}
+
+{% endblock %}
