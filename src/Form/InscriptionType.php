@@ -20,7 +20,6 @@ class InscriptionType extends AbstractType
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
             ->add('verifPassword', PasswordType::class)
-            
         ;
     }
 

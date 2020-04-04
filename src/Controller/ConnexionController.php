@@ -54,4 +54,16 @@ class ConnexionController extends AbstractController
     {
      
     }
+
+    
+    /**
+     * @Route("/chemin", name="chemin")
+     */
+    public function chemin(AuthenticationUtils $util, Utilisateur $utilisateur = null)
+    {
+        return $this->render('connexion/chemin.html.twig',[
+            'util' => $util->getLastUsername(),
+            'error' => $util->getLastAuthenticationError()
+        ]);
+    }
 }

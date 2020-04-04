@@ -1,0 +1,18 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Harry Codeur{% endblock %}
+
+{% block monTitre %}Harry codeur{% endblock %}
+{% block body %}
+<div class="row justify-content-md-center">
+        <h2>Hello Nom du joueur !</h2>
+</div>
+<div class="row justify-content-md-center">
+    <a href="" class="btn btn-success m-5">Jouer</a>
+    <a href="{{path('inscription')}}" class="btn btn-secondary m-5">Modifier profil</a>
+{% if is_granted ('ROLE_ADMIN') %}
+    <a href="" class="btn btn-info m-5">Question</a>
+{% endif %}
+    <a href="{{path('logout')}}" class="btn btn-danger m-5">Déconnexion</a>
+</div>
+{% endblock %}

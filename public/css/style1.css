@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'MagicSchoolTwo.ttf';
+    src: url('../police/MagicSchoolTwo.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'HogwartsWizard.ttf';
+    src: url('../police/HogwartsWizard.ttf') format("truetype");
+}
+.monTitre {
+    font-family: "MagicSchoolTwo.ttf";
+    color: gold;
+    font-size: 8em;
+    text-align: center;
+}
+h2{
+    font-family: "HogwartsWizard.ttf";
+    color: black;
+    font-size: 5em;
+    font-weight: bold;
+}
+.container {
+    background-image: url(../images/chemin1.jpg);
+    background-size: cover;
+    overflow-y: auto;
+    height: 100vh;
+}
+.harry {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+#pointeur {
+    cursor: url(../images/cursor.png) 2 2, auto;
+}

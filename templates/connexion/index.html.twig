@@ -25,17 +25,8 @@
     <input type="password" required name="_password" class="form-control">
 </div>
 <div class="form-group"> 
-{% if not app.user %}
 <input type="submit" class="btn btn-primary m-3" value="Se connecter">
 <a href="{{path('inscription')}}" class="btn btn-warning m-3">Inscription</a>
-{% else %}
-<a href="{{path('logout')}}" class="btn btn-danger m-3">Déconnexion</a>
-<a href="{{path('logout')}}" class="btn btn-secondary m-3">Modifier profil</a>
-<a href="" class="btn btn-success m-3">Jouer</a>
-{% endif %}
-{% if is_granted ('ROLE_ADMIN') %}
-<a href="" class="btn btn-info m-3">Question</a>
-{% endif %}
 </div>
 </form>
 {% endblock %}

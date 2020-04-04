@@ -15,7 +15,7 @@ function suitsouris(evenement) {
     document.getElementById("image_suit_souris").style.top = (y + 1) + 'px';
 }
 
-function openLink(link, id) {
+/*function openLink(link, id) {
     var form = document.createElement("form", { action: link, method: "POST" });
     form.appendChild(document.createElement("input", { name: "questionId", value: id }));
     document.body.appendChild(form);
@@ -25,7 +25,7 @@ function openLink(link, id) {
 
 
 }
-/*$(function(){
+$(function(){
     $("form").submit(function(e) {
       e.preventDefault();
       var $form = $(this);
