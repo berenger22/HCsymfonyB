@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\InscriptionType;
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,10 +27,13 @@ class ConnexionController extends AbstractController
 
     /**
     * @Route("/inscription", name="inscription")
+    * @Route("/modif/{id}", name="modif")
     */
-    public function inscription(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
+    public function formulaire(Utilisateur $utilisateur = null, Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
     {
-        $utilisateur = new Utilisateur();
+        if(!$utilisateur){
+             $utilisateur = new Utilisateur();
+        }
         $form = $this->createForm(InscriptionType::class,$utilisateur);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -59,11 +63,12 @@ class ConnexionController extends AbstractController
     /**
      * @Route("/chemin", name="chemin")
      */
-    public function chemin(AuthenticationUtils $util, Utilisateur $utilisateur = null)
+    public function chemin(AuthenticationUtils $util)
     {
+     
         return $this->render('connexion/chemin.html.twig',[
             'util' => $util->getLastUsername(),
-            'error' => $util->getLastAuthenticationError()
+            'error' => $util->getLastAuthenticationError(),
         ]);
     }
 }
