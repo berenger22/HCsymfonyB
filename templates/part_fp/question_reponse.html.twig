@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Harry Codeur{% endblock %}
+
+{% block monTitre %}Harry codeur{% endblock %}
+{% block sousTitre %}Les requetes de la mort{% endblock %}
+{% block body %}
+
+    <div class="justify-content-around" id="block">
+        <div class="">
+            <h4 class="">Votre question :</h4>
+        </div>
+        <div class="" id="formulaire">
+            {{ form_start(form) }}
+            {{ form_row(form.domaine) }}
+            {{ form_row(form.intitule, { 'label':'Question','attr': {'placeholder': 'Votre question'}}) }}
+            {{ form_row(form.description, {'attr': {'placeholder': 'Votre description'}}) }}
+            {{ form_row(form.reponses, {'label': false }) }}
+            {{ form_row(form.justification, {'attr': {'placeholder': 'Votre justification'}}) }}
+            <a class="btn btn-info" href="{{ path('app_profil') }}" >Retour</a>
+            <button  class="btn btn-warning">Envoyer</button>
+            {{ form_end(form) }}
+        </div>  
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $container = $('div#question_form_reponses');
+
+            var index = $container.find(':input').length;
+            if (!document.getElementById('question_form_reponses_3'))
+                for (i = 0; i < 4; i++) {
+                    addReponse($container);
+                }
+            ;
+            function addReponse($container) {
+// Dans le contenu de l'attribut « data-prototype », on remplace :
+// - le texte "__name__label__" qu'il contient par le label du champ
+// - le texte "__name__" qu'il contient par le numéro du champ
+                var template = $container.attr('data-prototype')
+                        .replace(/__name__label__/g, 'Reponse n°' + (index + 1))
+                        .replace(/__name__/g, index)
+                        ;
+
+// On crée un objet jquery qui contient ce template
+                var $prototype = $(template);
+
+
+
+// On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+
+// Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+
+
+        });
+
+
+    </script>
+{% endblock %}
