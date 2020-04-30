@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Harry Codeur{% endblock %}
+
+{% block monTitre %}Harry codeur{% endblock %}
+{% block sousTitre %}Les requetes de la mort{% endblock %}
+{%  block body %}
+    <div class="row mt-5 justify-content-md-around">
+        <div class="col-md-2" id="avatar">
+            <img id="avatar" class="img-circle" src="../images/{{ app.user.avatar }}" style="max-width: 154px;max-height: 175px;">
+        </div>
+        <div class="col-md-2 mt-5">
+            <h2><span class="prof" style="color: white;">{{ app.user.firstname }}</span></h2>
+        </div>
+        <div class="col-md-2 mt-5">
+            <h2><span class="prof" style="color: white;">{{ app.user.lastname }}</span></h2>
+        </div>
+
+    </div>
+    <div class="table-responsive-md mt-5" id="questionTab">
+
+            <table class="table table-secondary">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Lang.</th>
+                        <th scope="col">Question</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set i=0 %}
+                    {% for question in listeQuestions %}
+                        <tr id="{{ question.id }}">
+                            {% set i=i+1 %}
+                            <td >{{ i }}</td>
+                            <td><span class="{{ question.domaine.logo }} fa-2x" aria-hidden="true"></span></td>
+                            <td>{{ question.intitule }}</td>
+                            <td><a class="btn btn-link" href="{{  path('app_edit',  { 'id':question.id}) }}">Modifier</a></td>
+                            <td>
+                                <form method="POST" action="{{ path('app_remove',  { 'id':question.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cette question?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('remove'~question.id) }}">
+                                    <button class="btn btn-link">Supprimer</button>
+                                </form>
+                                </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <div class="row justify-content-end mr-5" id="pop-up">
+        <a class="btn btn-warning " href="{{ path('chemin') }}">Retour</a>
+        <a class="btn btn-warning ml-5" href="{{ path('app_question') }}">Enregistrer votre question</a>
+    </div>
+{% endblock %}
