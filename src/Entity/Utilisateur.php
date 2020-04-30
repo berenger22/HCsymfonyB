@@ -62,6 +62,11 @@ class Utilisateur implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Professeur", mappedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $professeur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -162,5 +167,23 @@ class Utilisateur implements UserInterface
     public function getSalt()
     {
         
+    }
+
+    public function getProfesseur(): ?Professeur
+    {
+        return $this->professeur;
+    }
+
+    public function setProfesseur(?Professeur $professeur): self
+    {
+        $this->professeur = $professeur;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUtilisateur = null === $professeur ? null : $this;
+        if ($professeur->getUtilisateur() !== $newUtilisateur) {
+            $professeur->setUtilisateur($newUtilisateur);
+        }
+
+        return $this;
     }
 }

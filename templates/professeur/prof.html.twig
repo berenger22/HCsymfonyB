@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Harry Codeur{% endblock %}
+
+{% block monTitre %}Harry codeur{% endblock %}
+{% block sousTitre %}{{app.user.firstname}}{{app.user.lastname}} {% endblock %}
+{% block body %}
+<a href="#" class="d-block btn btn-success m-3">Ajouter une question</a>
+<div class="card border-warning mb-3" style="max-width: 20rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body">
+      <h4 class="card-title">Warning card title</h4>
+      <p class="card-text">Some quick example text to build on the card title and.</p>
+      <button type="button" class="btn btn-outline-secondary">Modifier</button>
+      <button type="button" class="btn btn-outline-danger">Supprimer</button>
+    </div>
+  </div>
+{% endblock %}

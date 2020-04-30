@@ -8,8 +8,8 @@
 <div class="row justify-content-md-center">
     <a href="" class="btn btn-success m-5">Jouer</a>
     <a href="{{path('modif', {'id' : app.user.id})}}" class="btn btn-secondary m-5">Modifier profil</a>
-{% if is_granted ('ROLE_ADMIN') %}
-    <a href="" class="btn btn-info m-5">Question</a>
+{% if is_granted ('ROLE_PROF') %}
+    <a href="{{path('professeur', {'id' : app.user.id})}}" class="btn btn-info m-5">Question</a>
 {% endif %}
     <a href="{{path('logout')}}" class="btn btn-danger m-5">Déconnexion</a>
 </div>
