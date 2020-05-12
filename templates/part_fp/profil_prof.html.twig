@@ -7,13 +7,13 @@
 {%  block body %}
     <div class="row mt-5 justify-content-md-around">
         <div class="col-md-2" id="avatar">
-            <img id="avatar" class="img-circle" src="{{ app.user.avatar }}" >
+            <img id="avatar" class="img-circle" src="../images/{{ app.user.avatar }}" style="max-width: 154px;max-height: 175px;">
         </div>
         <div class="col-md-2 mt-5">
-            <h2><span class="prenomProf">{{ app.user.firstname }}</span></h2>
+            <h2><span class="prof" style="color: white;">{{ app.user.firstname }}</span></h2>
         </div>
         <div class="col-md-2 mt-5">
-            <h2><span class="nomProf">{{ app.user.lastname }}</span></h2>
+            <h2><span class="prof" style="color: white;">{{ app.user.lastname }}</span></h2>
         </div>
 
     </div>
@@ -51,7 +51,7 @@
             </table>
     </div>
     <div class="row justify-content-end mr-5" id="pop-up">
-        <a class="btn btn-warning" href="{{ path('app_question') }}">Enregistrer votre question</a>
-        <a class="btn btn-warning ml-5" href="{{ path('chemin') }}">Jouer</a>
+        <a class="btn btn-warning " href="{{ path('chemin') }}">Retour</a>
+        <a class="btn btn-warning ml-5" href="{{ path('app_question') }}">Enregistrer votre question</a>
     </div>
 {% endblock %}

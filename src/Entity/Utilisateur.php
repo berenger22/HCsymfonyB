@@ -9,6 +9,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="utype", type="string")
+ * @ORM\DiscriminatorMap({
+ * "Utilisateur" = "Utilisateur",
+ * "Professeur" = "Professeur",
+ * "SuperUtilisateur"="SuperUtilisateur"
+ * })
  * @UniqueEntity(
  * fields= {"email"}, message="L'adresse mail éxiste déjà !",
  * {"username"}, message="L'identifiant éxiste déjà !"
@@ -58,9 +65,13 @@ class Utilisateur implements UserInterface
     private $verifPassword;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="json")
      */
-    private $roles;
+    private $roles=[];
+
+    function __construct(){
+        $this->setRoles(['ROLE_USER']);
+}
 
     public function getId(): ?int
     {
@@ -139,18 +150,15 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
-        return [$this->roles];
+        $roles = $this->roles;
+        return array_unique($roles);
     }
 
-    public function setRoles(?string $roles): self
+    public function setRoles(array $roles): self
     {
-        if($roles === null){
-            $this->roles = "ROLE_USER";
-        } else {
-            $this->roles = $roles;
-        }
+        $this->roles = $roles;
         return $this;
     }
 
