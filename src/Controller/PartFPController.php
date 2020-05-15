@@ -47,7 +47,7 @@ class PartFPController extends AbstractController {
         $em = $this->getDoctrine()
                 ->getManager();
 
-        $question = $em->getRepository(Question::Class)
+        $question = $em->getRepository(Question::class)
                 ->find($id);
 
         $form = $this->createForm(QuestionFormType::class, $question);

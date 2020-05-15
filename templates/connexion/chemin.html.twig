@@ -13,7 +13,7 @@
 {% endif %}
 {% if is_granted ('ROLE_SUPER_ADMIN') %}
     <a href="{{path('inscription_prof')}}" class="btn btn-info m-5" >Ajouter un prof</a>
-    <a href="{{path('chemin')}}" class="btn btn-info m-5" >Consulter la BDD</a>
+    <a href="{{path('consulteBDD')}}" class="btn btn-info m-5" >Consulter la BDD</a>
 {% endif %}
     <a href="{{path('logout')}}" class="btn btn-danger m-5">Déconnexion</a>
 </div>

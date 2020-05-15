@@ -125,4 +125,16 @@ class ConnexionController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    /**
+     * @Route("/consulteBDD", name="consulteBDD")
+     */
+    public function consulteBDD(AuthenticationUtils $util, UtilisateurRepository $repo)
+    {   
+        $utilisateurs = $repo->findAll();
+        return $this->render('part_fp/consulteBDD.html.twig',[
+            'util' => $util->getLastUsername(),
+            'utilisateurs' => $utilisateurs,
+            'error' => $util->getLastAuthenticationError(),
+        ]);
+    }
 }
