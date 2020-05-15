@@ -30,7 +30,10 @@
         "attr" : { "placeholder" : "confirmer votre mot de passe"},
         "label" : "Confirmer Votre mot de passe :"
     })}}
-    {{ form_row(form.avatar)}}    
+    {# {{ form_row(form.avatar)}}
+    {% if is_granted ('ROLE_SUPER_ADMIN') %}
+        {{ form_row(form.role)}}
+    {% endif %}     #}
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-primary m-3">Valider</button>
