@@ -1,0 +1,36 @@
+<script type="text/javascript">var $CollectionHolder;
+    jQuery(document).ready(function () {
+        getQuestion();
+    });
+    function getQuestion() {
+        $reponseHolder = $('#reponses');
+        $questionHolder = $('#question');
+        var url = '/get/question/' + $('#professeur_id').text();
+        $.ajax(url, {
+            type: "GET",
+            statusCode: {
+                200: function (data) {
+                    $question = data.question;
+                    $questionHolder.empty();
+                    $reponseHolder.empty();
+                    var $newQuestion = $questionHolder.data('prototype');
+                    $newQuestion = $newQuestion.replace(/__id__/g, $question.id);
+                    $newQuestion = $newQuestion.replace(/__intitule__/g, $question.intitule);
+                    $newQuestion = $newQuestion.replace(/__description__/g, $question.description);
+                    $newQuestion = $newQuestion.replace(/__domaine_logo__/g, $question.domaine.logo);
+                    $questionHolder.append($newQuestion);
+                    $question.reponses.forEach(($reponse) => {
+                        var $newReponse = $reponseHolder.data('prototype');
+                        $newReponse = $newReponse.replace(/__id__/g, $reponse.id);
+                        $newReponse = $newReponse.replace(/__intitule__/g, $reponse.intitule);
+                        $reponseHolder.append($newReponse);
+                    });
+                },
+                202: function ($combat) {
+                    finCombat($combat);
+                }
+            }
+        }
+        );
+    }
+</script>

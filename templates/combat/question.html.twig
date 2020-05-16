@@ -1,0 +1,4 @@
+<span id='question_id' style='display: none;'>{{ data.id }}</span>
+<i style='height:100%; width:100%; display: flex; justify-content: center;' class='fab {{ data.domaine_logo }} fa-2x col col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 border-right border-primary'></i>
+<div class='col col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10' style='display: flex; justify-content: center'>{{ data.intitule }}</div>
+{% include '/combat/popup.html.twig' with {'type': 'secondary', 'data': {'title': 'description', 'id': 'question_description', 'content': data.description }} %}

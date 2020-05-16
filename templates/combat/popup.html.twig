@@ -1,0 +1,28 @@
+<a class='rounded col col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 btn btn-info' href='#{{ data.id }}' id='{{ data.id }}_button'>
+    <i class='fas fa-info'></i>
+</a>
+<div class='modal modal-content bg-{{ type }}' id='{{ data.id }}' style='height:auto;'>
+    <div class='modal-header'>
+        <h2 class='modal-title text-white'>{{ data.title }}</h2>
+    </div>
+    <div class='modal-body text-white'>
+        {{ data.content }}
+    </div>
+    <div class='modal-footer' data-prototype='<a class=&quot;btn btn-primary&quot; href=&quot;#{{ data.id }}&quot; rel=&quot;modal:close&quot;></a>'>
+        <a class='btn btn-primary' href='#{{ data.id }}' rel='modal:close'>Fermer</a>
+    </div>
+</div>
+<script>
+    $('#{{ data.id }}_button').click(function (event) {
+        event.preventDefault();
+        $(this).modal({
+            escapeClose: false,
+            clickClose: false,
+            showClose: false
+        });
+    });
+    $('.fermer').on('click',function(){
+        
+       alert('fermer'); 
+    });
+</script>

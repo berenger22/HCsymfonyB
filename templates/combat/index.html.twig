@@ -1,0 +1,74 @@
+{% extends 'base_r.html.twig' %}
+
+{% block title %}Hello CombatController!{% endblock %}
+
+{% block body %}
+    <div class="container" style="height: 100vh; display: flex; flex-direction: column;">
+        <div class="row" style="flex-basis: 70%; background-image: url(/images/darklight.png); background-size: 100% 100%;">
+            <div class="col col-md-6 col-lg-6 col-xl-6" style="display: flex; flex-direction: column;">
+                <div class="col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-direction: column; flex-basis: 35%;">
+                    <div style="flex-basis: 30%;"></div>
+                    <div id="professeur_bar" style="display:flex; flex-direction: column; border-radius: 30% 10%; border-style: solid; background-color: white; flex-basis: 70%;" class="col-md-11 col-lg-11 col-xl-11 offset-md-1 offset-lg-1 offset-xl-1" >
+                        <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
+                            <div style="flex-basis: 40%;" class="col-md-12 col-lg-12 col-xl-12" ></div>
+                            <span id="professeur_id" class="d-none">{{ professeur.id }}</span>
+                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h2 id="professeur_name">{{ professeur.firstname }} {{ professeur.lastname }}</h2></div>
+                        </div>
+                        <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
+                            <div style="display: flex; align-items: center; background-color: #444444; border-radius: 30% 30%; flex-basis: 60%;" class="row col-md-10 col-lg-10 col-xl-10 offset-md-2 offset-lg-2 offset-xl-2" >
+                                <div class="progress" style="flex-basis: 100%; border-style: solid; border-color: white; border-width: thick; height:70%; border-radius: 30% 30%; background-color: #777777;">
+                                    <div id="opponentLifePoints" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div style="flex-basis: 40%;" class="col-md-12 col-lg-12 col-xl-12" ></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-12" style="flex-basis: 65%; display: flex; flex-direction: column;">
+                    <div style="flex-basis: 11%;"></div>
+                    <img style="flex-basis: 70%;" class="col-md-7 col-lg-7 col-xl-7 offset-md-3 offset-lg-3 offset-xl-3" src="/images/harry2.png" ></img>
+                </div>
+            </div>
+            <div class="col col-md-6 col-lg-6 col-xl-6" style="display: flex; flex-direction: column;">
+                <div id="professeur_avatar" class="col-md-12 col-lg-12 col-xl-12" style="flex-basis: 65%; display: flex; flex-direction: column;">
+                    <div style="flex-basis: 20%;"></div>
+                    <img style="flex-basis: 80%;" class="col-md-9 col-lg-9 col-xl-9 offset-md-1 offset-lg-1 offset-xl-1" src="{{ professeur.avatar }}" ></img>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-direction: column; flex-basis: 35%;">
+                    {#<div style="flex-basis: 30%;"></div>#}
+                    <div style="display:flex; flex-direction: column; border-radius: 30% 10%; border-style: solid; background-color: white; flex-basis: 70%;" class="col-md-11 col-lg-11 col-xl-11 offset-md-1 offset-lg-1 offset-xl-1" >
+                        <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
+                            <div style="flex-basis: 40%;" class="col-md-12 col-lg-12 col-xl-12" ></div>
+                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h2>Harry Codeur</h2></div>
+                        </div>
+                        <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
+                            <div style="display: flex; align-items: center; background-color: #444444; border-radius: 30% 30%; flex-basis: 60%;" class="row col-md-10 col-lg-10 col-xl-10 offset-md-2 offset-lg-2 offset-xl-2" >
+                                <div class="progress" style="flex-basis: 100%; border-style: solid; border-color: white; border-width: thick; height:70%; border-radius: 30% 30%; background-color: #777777;">
+                                    <div id="lifePoints" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div style="flex-basis: 40%;" class="col-md-12 col-lg-12 col-xl-12" ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="flex-basis: 30%; background-color: #222222;">
+            <div class="col col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 rounded" style="display: flex; flex-direction: column; padding-right:0; padding-left:0;">
+                <div id="question" class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-basis: 20%; background-color: white; border: 0.5rem ridge orange; padding-right:0; padding-left:0; justify-content:space-between; align-items: center;" data-prototype="{% include '/combat/question.html.twig' with {'data': {'id': '__id__', 'intitule': '__intitule__', 'description': '__description__', 'domaine_logo': '__domaine_logo__'} } only %}">
+                </div>
+                <div id="reponses" class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn-group btn-group-toggle" data-toggle="buttons" style="display: flex; flex-wrap: wrap; flex-basis: 80%; background-color: white; border: 0.5rem ridge orange; padding-right:0; padding-left:0;" data-prototype="{% include '/combat/reponse.html.twig' with {'data': {'id': '__id__', 'intitule': '__intitule__'} } only %}">
+                </div>
+            </div>
+            <div class="col col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 rounded" style="{#background-color: white; border: 0.5rem ridge graytext;#} padding: 0; display:flex; flex-direction: column;">
+                <button type="button" id="fin" class='col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn btn-info border border-primary d-none' style="flex-basis: 50%">Terminer <i class="fas fa-forward"></i></button>
+                <button type="button" id="valider" class='col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn btn-success border border-primary' style="flex-basis: 50%">Valider</button>
+                <button type="button" id="fuir" class='col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn btn-danger border border-primary' style="flex-basis: 50%">Fuir</button>
+            </div>
+        </div>
+    </div>
+    {% include '/combat/getQuestion.html.twig' %}
+    {% include '/combat/postQuestion.html.twig' %}
+    {% include '/combat/finCombat.html.twig' %}
+    <div id="popups" data-prototype="{% include '/combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
+{% endblock %}

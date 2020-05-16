@@ -1,0 +1,61 @@
+<script>
+    function finCombat($combat) {
+        var $score = $combat.questionsCorrectes.length + "/" + ($combat.questionsCorrectes.length + $combat.questionsIncorrectes.length);
+        $("#fin").on('click', function () {
+            if ($combat.lifePoints <= 0) {
+                var $popupHolder = $('#popups');
+                var index = $popupHolder.children().length;
+                var newPopup = $popupHolder.data('prototype');
+                newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+                newPopup = newPopup.replace(/__title__/g, 'Quel dommage !');
+                newPopup = newPopup.replace(/__content__/g, "<h3>Vous avez été vaincu par " + $('#professeur_name').text() + "</h3><br>Votre score : " + $score);
+                newPopup = newPopup.replace(/__type__/g, 'danger');
+                $questionHolder.append(newPopup);
+
+                $footer = $('#popup_' + index).find('.modal-footer');
+                $footer.empty();
+                $footer.append($footer.data('prototype'));
+                $newButton = $footer.children().last();
+                $newButton.text('Fin du combat');
+                $newButton.on('click', function () {
+                    window.location.href = '/professeur';
+                });
+
+                $('#popup_' + index + '_button').click();
+            } else if ($combat.opponentLifePoints <= 0) {
+                var $popupHolder = $('#popups');
+                var index = $popupHolder.children().length;
+                var newPopup = $popupHolder.data('prototype');
+                newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+                newPopup = newPopup.replace(/__title__/g, 'Félicitations !');
+                newPopup = newPopup.replace(/__content__/g, "<h3>Vous avez vaincu " + $('#professeur_name').text() + "</h3><br>Votre score : " + $score);
+                newPopup = newPopup.replace(/__type__/g, 'success');
+                $questionHolder.append(newPopup);
+
+                $footer = $('#popup_' + index).find('.modal-footer');
+                $footer.empty();
+                $footer.append($footer.data('prototype'));
+                $newButton = $footer.children().last();
+                $newButton.text('Fin du combat');
+                $newButton.on('click', function () {
+                    window.location.href = '/chemin';
+                });
+                $('#popup_' + index + '_button').click()
+            }
+
+            $('#professeur_avatar').animate({
+                opacity: 0,
+                left: "+=100"
+            }, 1000);
+            $('#professeur_bar').animate({
+                opacity: 0,
+                right: "+=100"
+            }, 1000);
+            $('#question').empty();
+            $('#reponses').empty();
+        });
+        $('#valider').addClass('d-none');
+        $('#fuir').addClass('d-none');
+        $('#fin').removeClass('d-none');
+    }
+</script>

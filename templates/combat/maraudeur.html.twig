@@ -1,0 +1,293 @@
+<html class="" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chemin</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        @font-face {
+            font-family: "Satisfy";
+            src: url("/police/Satisfy-Regular.ttf") format("truetype");
+        }
+
+        body {
+            background-color: black;
+        }
+
+        #main {
+            min-width: 100vw;
+            min-height: 100vh;
+            background: url('/images/fond.jpg') center center/cover;
+        }
+
+        .obj,
+        .path {
+            visibility: hidden;
+        }
+
+        .name_holder {
+            visibility: visible;
+        }
+
+        .obj {
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            position: absolute;
+            /* Align center */
+            top: -10px;
+            left: 5px;
+            opacity: 0.5;
+        }
+
+        .container {
+            width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        input[type="range"] {
+            width: 400px;
+        }
+
+        .shoe-left {
+            position: fixed;
+            opacity: 0;
+        }
+
+        .shoe-right {
+            position: fixed;
+            opacity: 0;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes circle {
+            0% {
+                clip-path: circle(90% at 68% 35%);
+            }
+
+            100% {
+                clip-path: circle(8% at 68% 35%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="container">
+            <div id="obj1" class="obj" style="background: #FF0000;"></div>
+            <div id="obj2" class="obj" style="background: #00FF00;"></div>
+            <div id="obj3" class="obj" style="background: #0000FF;"></div>
+            <div id="name_holder" class="name_holder obj"
+                style="position: absolute; bottom: 105px; left: -60px; width: 150px; height: 50px; font: 15px Satisfy, cursive; text-align: center; background: url('/images/name_holder.svg') center center/cover; z-index: 10; color: #615349; cursor: default; opacity: 1;">
+                <p style="display: inline-block; margin: 12px 0 0 15px;">{{ user.username }}</p>
+            </div>
+
+            <div id="obj4" class="obj" style="background: #FF0000;"></div>
+            <div id="obj5" class="obj" style="background: #00FF00;"></div>
+            <div id="obj6" class="obj" style="background: #0000FF;"></div>
+            <div id="name_holder2" class="name_holder obj"
+                style="position: absolute; bottom: 105px; left: -60px; width: 150px; height: 50px; font: 15px Satisfy, cursive; text-align: center; background: url('/images/name_holder.svg') center center/cover; z-index: 10; color: #615349; cursor: default; opacity: 1;">
+                <p style="display: inline-block; margin: 12px 0 0 15px;">{{ professeur.firstname }} {{professeur.lastname}}</p>
+            </div>
+            <svg version="1.1" x="0px" y="0px" width="500px" height="500px" viewBox="0 0 500 500"
+                enable-background="new 0 0 500 500" xml:space="preserve">
+
+                <!-- ### RECTANGLE ### ->
+            <path id="path" class="path" fill="none" stroke="#FF0000" stroke-width="2.8243" stroke-miterlimit="10" d="M 50,50 H 450 V 450 H 50 L 50,50"></path>
+            <path id="path2" class="path" fill="none" stroke="#00FF00" stroke-width="2.8243" stroke-miterlimit="10" d="M 35,35 H 465 V 465 H 35 L 35,35"></path>
+            <path id="path3" class="path" fill="none" stroke="#0000FF" stroke-width="2.8243" stroke-miterlimit="10" d="M 65,65 H 435 V 435 H 65 L 65,65"></path>
+            <path id="path4" class="path" fill="none" stroke="#FF00FF" stroke-width="2.8243" stroke-miterlimit="10" d="M 0,0 H 500 V 500 H 0 L 0,0"></path>
+            <!--### /RECTANGLE ### -->
+
+                <!-- ### CIRCLE ### -->
+                <path id="path" class="path" fill="none" stroke="#FF0000" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -200, 0 a 200,200 0 0,1 400,0 a 200,200 0 0,1 -400,0 "></path>
+                <path id="path3" class="path" fill="none" stroke="#0000FF" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -185, 0 a 185,185 0 0,1 370,0 a 185,185 0 0,1 -370,0 "></path>
+                <path id="path2" class="path" fill="none" stroke="#00FF00" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -215, 0 a 215,215 0 0,1 430,0 a 215,215 0 0,1 -430,0 "></path>
+                <path id="path4" class="path" fill="none" stroke="#FF00FF" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -250, 0 a 250,250 0 0,1 500,0 a 250,250 0 0,1 -500,0 "></path>
+
+                <path id="path5" class="path" fill="none" stroke="#FF0000" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -200, 0 a 200,200 0 1,0 400,0 a 200,200 0 1,0 -400,0 "></path>
+                <path id="path6" class="path" fill="none" stroke="#0000FF" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -185, 0 a 185,185 0 1,0 370,0 a 185,185 0 1,0 -370,0 "></path>
+                <path id="path7" class="path" fill="none" stroke="#00FF00" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -215, 0 a 215,215 0 1,0 430,0 a 215,215 0 1,0 -430,0 "></path>
+                <path id="path8" class="path" fill="none" stroke="#FF00FF" stroke-width="2.8243" stroke-miterlimit="10"
+                    d="M 250,250 m -250, 0 a 250,250 0 1,0 500,0 a 250,250 0 1,0 -500,0 "></path>
+                <!-- ### /CIRCLE ### -->
+
+
+            </svg>
+            <div id="shoe_left"
+                data-prototype="<img class='shoe-left' style='animation: fade 6s 0s ease-in-out; width: 30px; heigth: auto;' src='/images/piedg2.png'/>">
+            </div>
+            <div id="shoe_right"
+                data-prototype="<img class='shoe-right' style='animation: fade 6s 0s ease-in-out; width: 30px; heigth: auto;' src='/images/piedd2.png'/>">
+            </div>
+        </div>
+    </div>
+    <script>
+        function pgcd(x, y) {
+            var m = x;
+            var n = y;
+            var t = m;
+            while (n > 0) {
+                t = m % n;
+                m = n;
+                n = t;
+            }
+            return (m);
+        }
+
+        function getOrientation(pt1, pt2) {
+            var pt3 = $('svg')[0].createSVGPoint();
+            pt3.x = Math.abs(pt2.x - pt1.x);
+            pt3.y = Math.abs(pt2.y - pt1.y);
+
+            var div = pgcd(pt3.x, pt3.x + pt3.y);
+            pt3.x = parseInt(pt3.x / div);
+            pt3.y = parseInt(pt3.y / div);
+
+            var counter = 0;
+            for (i = 0; i <= pt3.y; i++) {
+                switch (i) {
+                    case 0:
+                        counter += 0;
+                        break;
+                    case 1:
+                        counter += Math.pow(2, pt3.x * -1);
+                        break;
+                    default:
+                        counter += Math.pow(2, i * -1);
+                        break;
+                }
+            }
+
+            var orientation;
+            if (pt2.x >= pt1.x) {
+                if (pt2.y >= pt1.y) {
+                    orientation = counter * 90;
+                } else {
+                    orientation = counter * -90;
+                }
+            } else {
+                if (pt2.y >= pt1.y) {
+                    orientation = counter * -90 - 180;
+                } else {
+                    orientation = counter * 90 + 180;
+                }
+            }
+            return orientation;
+        }
+    </script>
+    <script>
+        var _prcnt;
+        var $svg_paths = $('.path');
+
+        var $objs = [];
+        $('.obj').each(function () {
+            $objs[$objs.length] = $(this);
+        });
+
+        $paths = [];
+        for (let i = 0; i < $svg_paths.length; i++) {
+            $paths[i] = {
+                path: $svg_paths[i],
+                mover: $objs[i],
+                orientation: 0,
+                roundPoint: function (point) {
+                    point.x = Math.round(point.x);
+                    point.y = Math.round(point.y);
+                    return point;
+                },
+                getLength: function (prcnt) {
+                    return (prcnt % 1) * this.path.getTotalLength();
+                },
+                getPointAtPrcnt: function (prcnt) {
+                    return this.roundPoint(this.path.getPointAtLength(this.getLength(prcnt)));
+                },
+                moveMover: function (prcnt) {
+                    let pt = this.getPointAtPrcnt(prcnt);
+                    this.orientation = getOrientation(pt, this.getPointAtPrcnt(prcnt + 0.01));
+                    this.mover.css('transform', 'translate3d(' + pt.x + 'px,' + pt.y + 'px, 0)');
+                }
+            };
+        }
+
+        function moveObj(prcnt) {
+            for (let i = 0; i < $paths.length; i++) {
+                if ($paths[i].mover.hasClass('name_holder_mover')) {
+                    $paths[i].moveMover(prcnt + 0.01);
+                } else {
+                    $paths[i].moveMover(prcnt);
+                }
+            }
+        }
+
+        moveObj(0);
+
+        function animationHandler(prcnt) {
+            _prcnt = prcnt;
+            moveObj(prcnt);
+            animationTimer = setTimeout(function () {
+                animationHandler((prcnt + 0.01) % 1);
+                if (prcnt > 0.47) {
+                    clearTimeout(animationTimer);
+                    $('#main').css({ 'animation': 'circle 3s forwards' });
+                    setTimeout(() => { window.location.href = "{{path('combat', {'id' : professeur.id})}}" }, 4000);
+                }
+            }, 200);
+        }
+
+        animationTimer = animationHandler(0);
+
+        //$('#name_holder').offset($paths[3].mover.offset());
+        var cpt = 0;
+        setInterval(function () {
+            cpt++;
+
+            var rotation = $paths[0].orientation;
+            var $holder = (cpt % 2 === 0) ? $('#shoe_left') : $('#shoe_right');
+
+            $holder.append($holder.data('prototype'));
+            var $shoe = $holder.children().last();
+            $shoe.offset($paths[2 - cpt % 2].mover.offset());
+            $shoe.css("transform", "rotate(" + rotation + "deg)");
+
+            //prof
+            var rotation = $paths[4].orientation;
+            var $holder = (cpt % 2 === 0) ? $('#shoe_right') : $('#shoe_left');
+
+            $holder.append($holder.data('prototype'));
+            var $shoe = $holder.children().last();
+            $shoe.offset($paths[6 - cpt % 2].mover.offset());
+            $shoe.css("transform", "rotate(" + rotation + "deg)");
+        }, 600);
+
+    </script>
+</body>
+
+</html>

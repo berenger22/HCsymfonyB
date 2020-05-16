@@ -33,17 +33,6 @@ class Domaine
      */
     private $questions;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Domaine", inversedBy="domaines")
-     */
-    private $domaine;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Domaine", mappedBy="domaine")
-     */
-    private $domaines;
-
-
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -109,48 +98,5 @@ class Domaine
         }
 
         return $this;
-    }
-
-    public function getDomaine(): ?self
-    {
-        return $this->domaine;
-    }
-
-    public function setDomaine(?self $domaine): self
-    {
-        $this->domaine = $domaine;
-
-        return $this;
-    }
-
-    public function addDomaine(self $domaine): self
-    {
-        if (!$this->domaine->contains($domaine)) {
-            $this->domaine[] = $domaine;
-            $domaine->setDomaine($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDomaine(self $domaine): self
-    {
-        if ($this->domaine->contains($domaine)) {
-            $this->domaine->removeElement($domaine);
-            // set the owning side to null (unless already changed)
-            if ($domaine->getDomaine() === $this) {
-                $domaine->setDomaine(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|self[]
-     */
-    public function getDomaines(): Collection
-    {
-        return $this->domaines;
     }
 }

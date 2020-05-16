@@ -6,7 +6,7 @@
 {% block sousTitre %}Tu es pret au combat {{app.user.username}} {% endblock %}
 {% block body %}
 <div class="row justify-content-md-center">
-    <a href="" class="btn btn-success m-5">Jouer</a>
+    <a href="{{path('maraudeur')}}" class="btn btn-success m-5">Jouer</a>
     <a href="{{path('chemin', {'id' : app.user.id})}}" class="btn btn-secondary m-5">Modifier profil</a>
 {% if (is_granted ('ROLE_ADMIN')) and (is_granted ('ROLE_SUPER_ADMIN') == false) %}
     <a href="{{path('app_profil')}}" class="btn btn-info m-5" >Question</a>

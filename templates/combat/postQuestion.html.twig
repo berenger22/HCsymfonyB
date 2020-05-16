@@ -1,0 +1,105 @@
+<script type="text/javascript">var $CollectionHolder;
+    jQuery(document).ready(function () {
+        $('#valider').on('click', function () {
+            postQuestion();
+        });
+    });
+    function postQuestion() {
+        var $url = "{{ path('ajax_post_question') }}";
+        $.post($url, {nb_questions: {{ nb_questions }}, question_id: $('#question_id').text(), reponse_id: $("input[name='reponses']:checked").val()}, function ($data) {
+            if ($data.correct === '1') {
+                var $popupHolder = $('#popups');
+                var index = $popupHolder.children().length;
+                var newPopup = $popupHolder.data('prototype');
+                newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+                newPopup = newPopup.replace(/__title__/g, 'Bravo !');
+                newPopup = newPopup.replace(/__content__/g, $data.justification);
+                newPopup = newPopup.replace(/__type__/g, 'success');
+                $popupHolder.append(newPopup);
+                $('#popup_' + index + '_button').addClass('d-none');
+                
+                $footer = $('#popup_' + index).find('.modal-footer');
+                $footer.empty();
+                $footer.append($footer.data('prototype'));
+                $newButton = $footer.children().last();
+                if ($data.combat.opponentLifePoints <= 0 | $data.combat.lifePoints <= 0) {
+                    $newButton.text('Ok');
+                    $newButton.on('click', function () {
+                        $('#opponentLifePoints').attr('aria-valuenow', '' + $data.combat.opponentLifePoints);
+                        $('#opponentLifePoints').animate({
+                            width: '' + $data.combat.opponentLifePoints + '%'
+                        }, 1000);
+
+                        /*$('#lifePoints').attr('aria-valuenow', '' + $data.combat.lifePoints);
+                        $('#lifePoints').animate({
+                            width: '' + $data.combat.lifePoints + '%'
+                        }, 1000);*/
+                        finCombat($data.combat);
+                    });
+                } else {
+                    $newButton.text('Question suivante');
+                    $newButton.on('click', function () {
+                        $('#opponentLifePoints').attr('aria-valuenow', '' + $data.combat.opponentLifePoints);
+                        $('#opponentLifePoints').animate({
+                            width: '' + $data.combat.opponentLifePoints + '%'
+                        }, 1000);
+
+                        /*$('#lifePoints').attr('aria-valuenow', '' + $data.combat.lifePoints);
+                        $('#lifePoints').animate({
+                            width: '' + $data.combat.lifePoints + '%'
+                        }, 1000);*/
+                        getQuestion();
+                    });
+                }
+
+                $('#popup_' + index + '_button').click();
+            } else {
+                var $popupHolder = $('#popups');
+                var index = $popupHolder.children().length;
+                var newPopup = $popupHolder.data('prototype');
+                newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+                newPopup = newPopup.replace(/__title__/g, 'Dommage !');
+                newPopup = newPopup.replace(/__content__/g, $data.justification);
+                newPopup = newPopup.replace(/__type__/g, 'danger');
+                $popupHolder.append(newPopup);
+                $('#popup_' + index + '_button').addClass('d-none');
+                
+                $footer = $('#popup_' + index).find('.modal-footer');
+                $footer.empty();
+                $footer.append($footer.data('prototype'));
+                $newButton = $footer.children().last();
+                if ($data.combat.opponentLifePoints <= 0 | $data.combat.lifePoints <= 0) {
+                    $newButton.text('Ok');
+                    $newButton.on('click', function () {
+                        /*$('#opponentLifePoints').attr('aria-valuenow', '' + $data.combat.opponentLifePoints);
+                        $('#opponentLifePoints').animate({
+                            width: '' + $data.combat.opponentLifePoints + '%'
+                        }, 1000);*/
+
+                        $('#lifePoints').attr('aria-valuenow', '' + $data.combat.lifePoints);
+                        $('#lifePoints').animate({
+                            width: '' + $data.combat.lifePoints + '%'
+                        }, 1000);
+                        finCombat($data.combat);
+                    });
+
+                } else {
+                    $newButton.text('Question suivante');
+                    $newButton.on('click', function () {
+                        /*$('#opponentLifePoints').attr('aria-valuenow', '' + $data.combat.opponentLifePoints);
+                        $('#opponentLifePoints').animate({
+                            width: '' + $data.combat.opponentLifePoints + '%'
+                        }, 1000);*/
+
+                        $('#lifePoints').attr('aria-valuenow', '' + $data.combat.lifePoints);
+                        $('#lifePoints').animate({
+                            width: '' + $data.combat.lifePoints + '%'
+                        }, 1000);
+                        getQuestion();
+                    });
+                }
+                $('#popup_' + index + '_button').click();
+            }
+        }, "json");
+    }
+</script>
