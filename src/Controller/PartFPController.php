@@ -27,11 +27,24 @@ class PartFPController extends AbstractController {
                 
         if($formQuestion->isSubmitted() && $formQuestion->isValid())
         {
+            $i = 0;
+            $reponses = $question->getReponses();
+            foreach($reponses as $reponse){
+                if($reponse->getCorrect()){
+                    $i = $i + 1;
+                }
+            }
+            if($i == 1){
             $question->setProfesseur($user);
             $em->persist($question);
             $em->flush();
-            
-            return $this->redirectToRoute('app_profil');
+            $this->addFlash('success', "Votre question a été ajoutée!");
+            return $this->render('part_fp/question_reponse.html.twig', [
+                'form' => $formQuestion->createView(),
+                ]);
+            } else {
+                $this->addFlash('error', "Il faut une seule bonne réponse pour que la question soit validée!!");
+            }
         }
 
         return $this->render('part_fp/question_reponse.html.twig', [
