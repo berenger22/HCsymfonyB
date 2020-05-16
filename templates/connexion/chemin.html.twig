@@ -7,7 +7,13 @@
 {% block body %}
 <div class="row justify-content-md-center">
     <a href="{{path('maraudeur')}}" class="btn btn-success m-5">Jouer</a>
-    <a href="{{path('chemin', {'id' : app.user.id})}}" class="btn btn-secondary m-5">Modifier profil</a>
+    {% if (is_granted ('ROLE_ADMIN')) and (is_granted ('ROLE_SUPER_ADMIN') == false) %}
+        <a href="{{path('app_editP', {'id' : app.user.id})}}" class="btn btn-secondary m-5">Modifier profil</a>
+    {% elseif (is_granted ('ROLE_USER')) and (is_granted ('ROLE_SUPER_ADMIN') == false) and (is_granted ('ROLE_ADMIN') == false) %}
+        <a href="{{path('app_editJ', {'id' : app.user.id})}}" class="btn btn-secondary m-5">Modifier profil</a>
+    {% elseif is_granted ('ROLE_SUPER_ADMIN') %}
+        <a href="{{path('app_editS', {'id' : app.user.id})}}" class="btn btn-secondary m-5">Modifier profil</a>
+    {% endif %}
 {% if (is_granted ('ROLE_ADMIN')) and (is_granted ('ROLE_SUPER_ADMIN') == false) %}
     <a href="{{path('app_profil')}}" class="btn btn-secondary m-5" >Question</a>
 {% endif %}

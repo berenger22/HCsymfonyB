@@ -76,7 +76,7 @@ class ConnexionController extends AbstractController
         ]);
     }
 
-     /**
+    /**
     * @Route("/inscriptionProf", name="inscription_prof")
     */
     public function formulaireProf(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
@@ -158,6 +158,26 @@ class ConnexionController extends AbstractController
         }
 
         return $this->render('connexion/inscriptionProf.html.twig', [
+                    'form' => $form->createView()]);
+    }
+    /**
+     * @Route("/editS/{id}",name="app_editS",
+     * requirements={"id"="\d+"})
+     */
+    public function editSuper(Request $request, SuperUtilisateur $utilisateur,EntityManagerInterface $em) {
+
+        $form = $this->createForm(SuperUtilisateurFormType::class, $utilisateur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($utilisateur);
+            $em->flush();
+
+            return $this->redirectToRoute('chemin');
+        }
+
+        return $this->render('connexion/inscription.html.twig', [
                     'form' => $form->createView()]);
     }
     /**
