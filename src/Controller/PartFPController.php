@@ -88,7 +88,7 @@ class PartFPController extends AbstractController {
      */
 
     public function profil(Request $request, UserInterface $user) {
-        dump($user);
+        // dump($user);
 //        $em = $this->getDoctrine()->getManager();    
 //        $listeQuestions = $em
 //                ->getRepository(Question::Class)
@@ -98,33 +98,30 @@ class PartFPController extends AbstractController {
             'listeQuestions' => $listeQuestions
         ]);
     }
-//        /**
-//     * @Route("/test", name="app_test")
-//     */
-//    public function test(Request $request) {
-//        
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $domaine = new Domaine();
-//        $form = $this->createForm(DomainFormType::class, $domaine);
-//        $form->handleRequest($request);
-//        
-//        if($form->isSubmitted() && $form->isValid()){
-//
-//            $domaine->setDomaine(null);
-//            $em->persist($domaine);
-//            $em->flush();
-//
-//            return $this->render('part_fp/index.html.twig', [
-//            'form' => $form->createView()
-//        ]);
-//
-//        }
-//
-//
-//        
-//        return $this->render('part_fp/index.html.twig', [
-//            'form' => $form->createView()
-//        ]);
-//    }
+    
+    /**
+    * @Route("/domaine", name="app_domaine")
+    */
+   public function test(Request $request) {
+       
+       $em = $this->getDoctrine()->getManager();
+
+       $domaine = new Domaine();
+       $form = $this->createForm(DomainFormType::class, $domaine);
+       $form->handleRequest($request);
+       
+       if($form->isSubmitted() && $form->isValid()){
+           
+           $em->persist($domaine);
+           $em->flush();
+
+           return $this->render('part_fp/domaine.html.twig', [
+           'form' => $form->createView()
+       ]);
+
+       }       
+       return $this->render('part_fp/domaine.html.twig', [
+           'form' => $form->createView()
+       ]);
+   }
 }

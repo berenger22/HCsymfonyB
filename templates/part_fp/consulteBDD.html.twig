@@ -11,7 +11,7 @@
 				<th scope="col">Username</th>
 				<th scope="col">Email</th>
 				<th scope="col">Rôle</th>
-				<th scope="col">Modifier</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,11 +25,11 @@
 					<td>{{utilisateur.roles|join}}</td>
 					{% if utilisateur.roles|join == 'ROLE_USER' %}
 						<td>
-							<a href="{{path('app_editJ', {'id' : utilisateur.id})}}" class="btn btn-secondary">Modifier profil</a>
+							<a href="{{path('app_editJ', {'id' : utilisateur.id})}}" class="btn btn-link">Modifier profil</a>
 						</td>
 					{% elseif utilisateur.roles|join == 'ROLE_ADMIN'%}
 						<td>
-							<a href="{{path('app_editP', {'id' : utilisateur.id})}}" class="btn btn-secondary">Modifier profil</a>
+							<a href="{{path('app_editP', {'id' : utilisateur.id})}}" class="btn btn-link">Modifier profil</a>
 						</td>
 					{% else %}
 						<td></td>
@@ -45,7 +45,7 @@
 				<th scope="col">Intitule</th>
 				<th scope="col">Visible</th>
 				<th scope="col">Professeur</th>
-				<th scope="col">Voir</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,10 +53,14 @@
 				<tr class="table-primary">
 					<th scope="row">{{question.id}}</th>
 					<td>{{question.intitule}}</td>
-					<td>{{question.visible}}</td>
-					<td>{{question.professeur.firstname}}</td>
+					{% if question.visible == 1 %}
+					<td>Active</td>
+					{% else %}
+					<td>Inactive</td>
+					{% endif %}
+					<td>{{question.professeur.username}}</td>
 					<td>
-						<a href="{{path('chemin', {'id' : question.id})}}" class="btn btn-secondary">Detail</a>
+						<a href="{{path('chemin', {'id' : question.id})}}" class="btn btn-link">Detail</a>
 					</td>
 				</tr>
 			{% endfor %}

@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
             $professeur->setLastname("Name" . $i);
             $professeur->setUsername("Username" . $i);
             $professeur->setPassword($this->passwordEncoder->encodePassword($professeur,'root'));
-            $professeur->setAvatar("/images/bruno.png");
+            $professeur->setAvatar("Bruno.png");
             $professeurs[] = $professeur;
             $manager->persist($professeur);
         }
