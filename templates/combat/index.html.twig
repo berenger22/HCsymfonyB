@@ -12,7 +12,7 @@
                         <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
                             <div style="flex-basis: 40%;" class="col-md-12 col-lg-12 col-xl-12" ></div>
                             <span id="professeur_id" class="d-none">{{ professeur.id }}</span>
-                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h2 id="professeur_name">{{ professeur.firstname |u.truncate(8) ~ " " ~ professeur.lastname |u.truncate(8) }}</h2></div>
+                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h4 id="professeur_name">{{ professeur.username }}</h4></div>
                         </div>
                         <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
                             <div style="display: flex; align-items: center; background-color: #444444; border-radius: 30% 30%; flex-basis: 60%;" class="row col-md-10 col-lg-10 col-xl-10 offset-md-2 offset-lg-2 offset-xl-2" >
@@ -32,14 +32,14 @@
             <div class="col col-md-6 col-lg-6 col-xl-6" style="display: flex; flex-direction: column;">
                 <div id="professeur_avatar" class="col-md-12 col-lg-12 col-xl-12" style="flex-basis: 65%; display: flex; flex-direction: column;">
                     <div style="flex-basis: 20%;"></div>
-                    <img style="flex-basis: 80%;" class="col-md-9 col-lg-9 col-xl-9 offset-md-1 offset-lg-1 offset-xl-1" src="../images/{{ professeur.avatar }}" ></img>
+                    <img style="flex-basis: 80%; max-width: 315px;" class="col-md-9 col-lg-9 col-xl-9 offset-md-1 offset-lg-1 offset-xl-1" src="../images/{{ professeur.avatar }}" ></img>
                 </div>
                 <div class="col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-direction: column; flex-basis: 35%;">
                     {#<div style="flex-basis: 30%;"></div>#}
                     <div style="display:flex; flex-direction: column; border-radius: 30% 10%; border-style: solid; background-color: white; flex-basis: 70%;" class="col-md-11 col-lg-11 col-xl-11 offset-md-1 offset-lg-1 offset-xl-1" >
                         <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
                             <div style="flex-basis: 40%;" class="col-md-12 col-lg-12 col-xl-12" ></div>
-                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h2>Harry Codeur</h2></div>
+                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h4>Harry Codeur</h4></div>
                         </div>
                         <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
                             <div style="display: flex; align-items: center; background-color: #444444; border-radius: 30% 30%; flex-basis: 60%;" class="row col-md-10 col-lg-10 col-xl-10 offset-md-2 offset-lg-2 offset-xl-2" >
