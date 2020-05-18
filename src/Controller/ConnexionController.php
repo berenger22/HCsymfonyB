@@ -195,4 +195,58 @@ class ConnexionController extends AbstractController
             'error' => $util->getLastAuthenticationError(),
         ]);
     }
+        /**
+     * @Route("/utilisateur/{id}",name="app_remove_utilisateur", methods={"DELETE"},
+     * requirements={"id"="\d+"})
+     */
+    public function removeJ(Request $request, Utilisateur $utilisateur)
+    {
+
+        if ($this->isCsrfTokenValid('remove' . $utilisateur->getId(), $request->request->get('_token'))) {
+
+            $em = $this->getDoctrine()
+                ->getManager();
+
+            $em->remove($utilisateur);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('consulteBDD');
+    }
+    /**
+     * @Route("/professeur/{id}",name="app_remove_professeur", methods={"DELETE"},
+     * requirements={"id"="\d+"})
+     */
+    public function removeP(Request $request, Professeur $utilisateur)
+    {
+
+        if ($this->isCsrfTokenValid('remove' . $utilisateur->getId(), $request->request->get('_token'))) {
+
+            $em = $this->getDoctrine()
+                ->getManager();
+
+            $em->remove($utilisateur);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('consulteBDD');
+    }
+    /**
+     * @Route("/questionS/{id}",name="app_remove_question", methods={"DELETE"},
+     * requirements={"id"="\d+"})
+     */
+    public function removeQ(Request $request, Question $question)
+    {
+
+        if ($this->isCsrfTokenValid('remove' . $question->getId(), $request->request->get('_token'))) {
+
+            $em = $this->getDoctrine()
+                ->getManager();
+
+            $em->remove($question);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('consulteBDD');
+    }
 }

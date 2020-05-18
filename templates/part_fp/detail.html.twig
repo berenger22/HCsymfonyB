@@ -1,0 +1,11 @@
+<div>
+    <div>{{ question.intitule }}</div>
+    <div>{{ question.description }}</div>
+    <div>
+    {% for reponse in question.reponses %}
+        {{reponse.correct}}<br>
+        {{reponse.intitule}}<br>   
+    {% endfor %}
+    </div>
+    <div>{{ question.justification }}</div>
+</div>

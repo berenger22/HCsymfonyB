@@ -11,12 +11,14 @@ use App\Entity\Domaine;
 use App\Form\QuestionFormType;
 use App\Form\DomainFormType;
 
-class PartFPController extends AbstractController {
+class PartFPController extends AbstractController
+{
 
     /**
      * @Route("/question", name="app_question")
      */
-    public function création(Request $request, UserInterface $user) {
+    public function création(Request $request, UserInterface $user)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $question = new Question();
@@ -24,74 +26,86 @@ class PartFPController extends AbstractController {
 
         $formQuestion = $this->createForm(QuestionFormType::class, $question);
         $formQuestion->handleRequest($request);
-                
-        if($formQuestion->isSubmitted() && $formQuestion->isValid())
-        {
+
+        if ($formQuestion->isSubmitted() && $formQuestion->isValid()) {
             $i = 0;
             $reponses = $question->getReponses();
-            foreach($reponses as $reponse){
-                if($reponse->getCorrect()){
+            foreach ($reponses as $reponse) {
+                if ($reponse->getCorrect()) {
                     $i = $i + 1;
                 }
             }
-            if($i == 1){
-            $question->setProfesseur($user);
-            $em->persist($question);
-            $em->flush();
-            $this->addFlash('success', "Votre question a été ajoutée!");
-            return $this->render('part_fp/question_reponse.html.twig', [
-                'form' => $formQuestion->createView(),
-                ]);
+            if ($i == 1) {
+                $question->setProfesseur($user);
+                $em->persist($question);
+                $em->flush();
+                $this->addFlash('success', "Votre question a été ajoutée!");
+                return $this->render('part_fp/profil_prof.html.twig');
             } else {
                 $this->addFlash('error', "Il faut une seule bonne réponse pour que la question soit validée!!");
             }
         }
 
         return $this->render('part_fp/question_reponse.html.twig', [
-                    'form' => $formQuestion->createView(),
+            'form' => $formQuestion->createView(),
         ]);
     }
     /**
      * @Route("/question/{id}/edit",name="app_edit",
      * requirements={"id"="\d+"})
      */
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $id)
+    {
 
         $em = $this->getDoctrine()
-                ->getManager();
+            ->getManager();
 
         $question = $em->getRepository(Question::class)
-                ->find($id);
+            ->find($id);
 
         $form = $this->createForm(QuestionFormType::class, $question);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em->persist($question);
-            $em->flush();
+            $i = 0;
+            $reponses = $question->getReponses();
+            foreach ($reponses as $reponse) {
+                if ($reponse->getCorrect()) {
+                    $i = $i + 1;
+                }
+            }
 
-            return $this->redirectToRoute('app_profil');
+            if ($i == 1) {
+                $em->persist($question);
+                $em->flush();
+                $this->addFlash('success', "Votre question a été ajoutée!");
+
+                return $this->redirectToRoute('app_profil');
+            } else {
+                $this->addFlash('error', "Il faut une seule bonne réponse pour que la question soit validée!!");
+            }
         }
 
         return $this->render('part_fp/question_reponse.html.twig', [
-                    'form' => $form->createView()]);
+            'form' => $form->createView()
+        ]);
     }
-    
-        /**
+
+    /**
      * @Route("/question/{id}",name="app_remove", methods={"DELETE"},
      * requirements={"id"="\d+"})
-     */    
-        public function remove(Request $request, Question $question) {
+     */
+    public function remove(Request $request, Question $question)
+    {
 
-        if ($this->isCsrfTokenValid('remove'.$question->getId(),$request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('remove' . $question->getId(), $request->request->get('_token'))) {
 
             $em = $this->getDoctrine()
                 ->getManager();
-            
+
             $em->remove($question);
             $em->flush();
-
         }
 
         return $this->redirectToRoute('app_profil');
@@ -100,41 +114,52 @@ class PartFPController extends AbstractController {
      * @Route("/profil", name="app_profil")
      */
 
-    public function profil(Request $request, UserInterface $user) {
+    public function profil(Request $request, UserInterface $user)
+    {
         // dump($user);
-//        $em = $this->getDoctrine()->getManager();    
-//        $listeQuestions = $em
-//                ->getRepository(Question::Class)
-//                ->findBy($idProfesseur);
+        //        $em = $this->getDoctrine()->getManager();    
+        //        $listeQuestions = $em
+        //                ->getRepository(Question::Class)
+        //                ->findBy($idProfesseur);
         $listeQuestions = $user->getQuestions();
         return $this->render('part_fp/profil_prof.html.twig', [
             'listeQuestions' => $listeQuestions
         ]);
     }
-    
+
     /**
-    * @Route("/domaine", name="app_domaine")
-    */
-   public function test(Request $request) {
-       
-       $em = $this->getDoctrine()->getManager();
+     * @Route("/domaine", name="app_domaine")
+     */
+    public function test(Request $request)
+    {
 
-       $domaine = new Domaine();
-       $form = $this->createForm(DomainFormType::class, $domaine);
-       $form->handleRequest($request);
-       
-       if($form->isSubmitted() && $form->isValid()){
-           
-           $em->persist($domaine);
-           $em->flush();
+        $em = $this->getDoctrine()->getManager();
 
-           return $this->render('part_fp/domaine.html.twig', [
-           'form' => $form->createView()
-       ]);
+        $domaine = new Domaine();
+        $form = $this->createForm(DomainFormType::class, $domaine);
+        $form->handleRequest($request);
 
-       }       
-       return $this->render('part_fp/domaine.html.twig', [
-           'form' => $form->createView()
-       ]);
-   }
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($domaine);
+            $em->flush();
+
+            return $this->render('part_fp/domaine.html.twig', [
+                'form' => $form->createView()
+            ]);
+        }
+        return $this->render('part_fp/domaine.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+    /**
+     * @Route("/detail/{id}", name="detail")
+     */
+    public function detail(Request $request, Question $question)
+    {
+
+        return $this->render('part_fp/detail.html.twig', [
+            'question' => $question
+        ]);
+    }
 }

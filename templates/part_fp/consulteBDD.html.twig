@@ -12,6 +12,7 @@
 				<th scope="col">Email</th>
 				<th scope="col">Rôle</th>
 				<th scope="col"></th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,11 +28,26 @@
 						<td>
 							<a href="{{path('app_editJ', {'id' : utilisateur.id})}}" class="btn btn-link">Modifier profil</a>
 						</td>
+						<td>
+							<form method="POST" action="{{ path('app_remove_utilisateur', { 'id':utilisateur.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cet utilisateur?')">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('remove'~utilisateur.id) }}">
+								<button class="btn btn-link">Supprimer</button>
+							</form>
+						</td>
 					{% elseif utilisateur.roles|join == 'ROLE_ADMIN'%}
 						<td>
 							<a href="{{path('app_editP', {'id' : utilisateur.id})}}" class="btn btn-link">Modifier profil</a>
 						</td>
+						<td>
+							<form method="POST" action="{{ path('app_remove_professeur', { 'id':utilisateur.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce professeur?')">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('remove'~utilisateur.id) }}">
+								<button class="btn btn-link">Supprimer</button>
+							</form>
+						</td>
 					{% else %}
+						<td></td>
 						<td></td>
 					{% endif %}
 				</tr>
@@ -46,6 +62,7 @@
 				<th scope="col">Visible</th>
 				<th scope="col">Professeur</th>
 				<th scope="col"></th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,18 +71,42 @@
 					<th scope="row">{{question.id}}</th>
 					<td>{{question.intitule}}</td>
 					{% if question.visible == 1 %}
-					<td>Active</td>
+						<td>Active</td>
 					{% else %}
-					<td>Inactive</td>
+						<td>Inactive</td>
 					{% endif %}
 					<td>{{question.professeur.username}}</td>
 					<td>
-						<a href="{{path('chemin', {'id' : question.id})}}" class="btn btn-link">Detail</a>
+						<a class="btn btn-link" onclick="show({{question.id}})">Detail</a>
+					</td>
+					<td>
+						<form method="POST" action="{{ path('app_remove_question', { 'id':question.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cette question?')">
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="hidden" name="_token" value="{{ csrf_token('remove'~question.id) }}">
+							<button class="btn btn-link">Supprimer</button>
+						</form>
 					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	<a href="{{path('chemin')}}" class="btn btn-warning m">Retour</a>
-	<div id="popups" data-prototype="{% include '../combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
+	<div id="popups" data-prototype="{% include '/combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+	function show(id){
+        var $url = "/detail" +"/"+ id;
+        $.get($url, function ($data) {
+                var $popupHolder = $('#popups');
+                var index = $popupHolder.children().length;
+                var newPopup = $popupHolder.data('prototype');
+                newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+                newPopup = newPopup.replace(/__title__/g, 'Détails !');
+                newPopup = newPopup.replace(/__content__/g, $data);
+                newPopup = newPopup.replace(/__type__/g, 'success');
+                $popupHolder.append(newPopup);
+				$('#popup_' + index + '_button').click()
+				});}
+	</script>
 {% endblock %}
