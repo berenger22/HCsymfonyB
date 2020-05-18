@@ -13,33 +13,35 @@
 			<div class="container" id="pointeur">
 				<div class="row">
 					<div class="col">
-						<button data-toggle="modal" href="#aide" id="info" class="btn btn-info m-5">Règle du jeu</button>
-						<div class="modal fade" id="aide">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h2 class="modal-title">Règle du jeu</h2>
-									</div>
-									<div class="modal-body">
-										<p id="texte">
-											Harry codeur est un jeu de combat basé sur vos connaisances informatiques.
-											<br>
-											Dans un premier temps, vous devez vous inscrire si cela n'est pas dejà fait.
-											                                      Une fois que vous serez connecter, vous ferez un combat face un formateur 
-											                                      concernant des questions sur l'informatique.
-											<br>
-											Il vous faudra 3 questions de bonne pour pouvoir vaincre votre adversaire.
-											                                      pour cela il faudra choisir une bonne réponse parmi 4 propostions.
-											<br>
-											A VOUS DE JOUER !!!
-										</p>
-									</div>
-									<div class="modal-footer">
-										<button class="btn btn-primary" data-dismiss="modal">Fermer</button>
-									</div>
-								</div>
+						<a href="#aide" id="info" class="btn btn-info m-5">Règles du jeu</a>
+						<div class="modal modal-content" id="aide">
+							<div class="modal-header">
+								<h2 class="modal-title">Règle du jeu</h2>
+							</div>
+							<div class="modal-body">
+								<p id="texte">
+									Harry codeur est un jeu de combat basé sur vos connaisances informatiques.
+									<br>
+									Dans un premier temps, vous devez vous inscrire si cela n'est pas dejà fait.
+																																															                                      Une fois que vous serez connecter, vous ferez un combat face un formateur 
+																																															                                      concernant des questions sur l'informatique.
+									<br>
+									Il vous faudra 3 questions de bonne pour pouvoir vaincre votre adversaire.
+																																															                                      pour cela il faudra choisir une bonne réponse parmi 4 propostions.
+									<br>
+									A VOUS DE JOUER !!!
+								</p>
+							</div>
+							<div class="modal-footer">
+								<a class="btn btn-primary" href="#aide" rel="modal:close">Fermer</a>
 							</div>
 						</div>
+						<script>
+							$('#info').click(function (event) {
+event.preventDefault();
+$(this).modal({escapeClose: false, clickClose: false, showClose: false});
+});
+						</script>
 					</div>
 				</div>
 				<h1 class="monTitre"> {% block monTitre %}{% endblock %}
@@ -48,10 +50,11 @@
 						</h2>
 						{% block body %}{% endblock %}
 					</div>
-                    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+					<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 					<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
+					<link
+					rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
 					{# // <script type="text/javascript" src="../js/script.js"></script>coucou #}
 					{% block javascripts %}{% endblock %}
 				</body>
