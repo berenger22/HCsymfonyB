@@ -25,7 +25,7 @@ class CombatController extends AbstractController
     public function maraudeur(Request $request, ProfesseurRepository $professeurRepository)
     {
         $user = $this->getUser();
-        $professeurs = $professeurRepository->findProfesseurWithQuestions();
+        $professeurs = $professeurRepository->findProfesseurWithQuestions($this->getUser());
         $professeur = $professeurs[array_rand($professeurs, 1)];
         return $this->render('combat/maraudeur.html.twig',
         ['professeur' => $professeur,'user' => $user]);

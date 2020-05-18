@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Professeur;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -12,32 +13,36 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Professeur[]    findAll()
  * @method Professeur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProfesseurRepository extends ServiceEntityRepository {
+class ProfesseurRepository extends ServiceEntityRepository
+{
 
-    public function __construct(ManagerRegistry $registry) {
-        parent::__construct($registry, Professeur::class);
-    }
+  public function __construct(ManagerRegistry $registry)
+  {
+    parent::__construct($registry, Professeur::class);
+  }
 
-    public function findProfesseurWithQuestions() {
-        $qb = $this->createQueryBuilder('p');
-        return $qb->join('p.questions', 'q')
-                        ->join('q.reponses', 'r')
-                        ->groupBy('p')
-                        ->addGroupBy('q')
-                        ->having($qb->expr()->gte('COUNT(r)', 2))
-                        ->join('q.reponses', 'r2')
-                        ->andWhere('r2.correct = true')
+  public function findProfesseurWithQuestions(Utilisateur $utilisateur)
+  {
+    $qb = $this->createQueryBuilder('p');
+    return $qb->where($qb->expr()->notIn('p.id', ':utilisateur_id'))
+      ->join('p.questions', 'q')
+      ->join('q.reponses', 'r')
+      ->groupBy('p')
+      ->addGroupBy('q')
+      ->having($qb->expr()->gte('COUNT(r)', 2))
+      ->join('q.reponses', 'r2')
+      ->andWhere('r2.correct = true')
+      ->setParameters(['utilisateur_id' => $utilisateur->getId()])
+      //->andWhere('r.correct = true')
+      ->orderBy('q.id', 'ASC')
+      ->getQuery()
+      ->getResult();
+  }
 
-                        //->andWhere('r.correct = true')
-                        ->orderBy('q.id', 'ASC')
-                        ->getQuery()
-                        ->getResult();
-    }
-
-    // /**
-    //  * @return Professeur[] Returns an array of Professeur objects
-    //  */
-    /*
+  // /**
+  //  * @return Professeur[] Returns an array of Professeur objects
+  //  */
+  /*
       public function findByExampleField($value)
       {
       return $this->createQueryBuilder('p')
@@ -51,7 +56,7 @@ class ProfesseurRepository extends ServiceEntityRepository {
       }
      */
 
-    /*
+  /*
       public function findOneBySomeField($value): ?Professeur
       {
       return $this->createQueryBuilder('p')
