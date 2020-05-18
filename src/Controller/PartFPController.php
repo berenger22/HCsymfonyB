@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Question;
 use App\Entity\Domaine;
 use App\Form\QuestionFormType;
@@ -161,5 +162,21 @@ class PartFPController extends AbstractController
         return $this->render('part_fp/detail.html.twig', [
             'question' => $question
         ]);
+    }
+    /**
+     * @Route("/visible/{id}", name="app_visible")
+     */
+    public function visible(Request $request, Question $question, EntityManagerInterface $em)
+    {
+        if($question->getVisible()){
+            $question->setVisible(false);
+            $em->persist($question);
+            $em->flush();
+        } else {
+            $question->setVisible(true);
+            $em->persist($question);
+            $em->flush();
+        }
+        return $this->redirectToRoute('consulteBDD');
     }
 }

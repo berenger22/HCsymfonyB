@@ -63,6 +63,7 @@
 				<th scope="col">Professeur</th>
 				<th scope="col"></th>
 				<th scope="col"></th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -76,6 +77,13 @@
 						<td>Inactive</td>
 					{% endif %}
 					<td>{{question.professeur.username}}</td>
+					<td>
+					{% if question.visible == 1 %}
+						<a class="btn btn-link" href="{{ path('app_visible', { 'id':question.id}) }}">Désactiver</a>
+					{% else %}
+						<a class="btn btn-link" href="{{ path('app_visible', { 'id':question.id}) }}" >Activer</a>
+					{% endif %}
+					</td>
 					<td>
 						<a class="btn btn-link" onclick="show({{question.id}})">Detail</a>
 					</td>
