@@ -67,4 +67,5 @@
 		</tbody>
 	</table>
 	<a href="{{path('chemin')}}" class="btn btn-warning m">Retour</a>
+	<div id="popups" data-prototype="{% include '../combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
 {% endblock %}
