@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 4; $i++) {
             $domaine = new Domaine();
             $domaine->setName('Domaine ' . $i);
-            $domaine->setLogo('fa-java');
+            $domaine->setLogo('fab fa-java');
             $domaines[] = $domaine;
             $manager->persist($domaine);
         }
