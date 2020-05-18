@@ -256,8 +256,8 @@
                 animationHandler((prcnt + 0.01) % 1);
                 if (prcnt > 0.47) {
                     clearTimeout(animationTimer);
-                    $('#main').css({ 'animation': 'circle 3s forwards' });
-                    setTimeout(() => { window.location.href = "{{path('combat', {'id' : professeur.id})}}" }, 4000);
+                    $('#main').css({ 'animation': 'circle 2s forwards' });
+                    setTimeout(() => { window.location.href = "{{path('combat', {'id' : professeur.id})}}" }, 2500);
                 }
             }, 100);
         }
