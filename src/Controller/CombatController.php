@@ -63,6 +63,7 @@ class CombatController extends AbstractController
         if (!empty($questions)) {
             $question = $questions[array_rand($questions, 1)];
             $question_tab = $serializer->normalize($question, null, [AbstractNormalizer::ATTRIBUTES => ['id', 'intitule', 'description', 'reponses' => ['id', 'intitule'], 'domaine' => ['logo']]]);
+            shuffle($question_tab['reponses']);
             return $this->json(['nb_questions' => count($questions), 'question' => $question_tab], 200);
         } else {
             return $this->json($combat_tab, 202);
