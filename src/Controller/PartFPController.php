@@ -40,7 +40,7 @@ class PartFPController extends AbstractController
                 $em->persist($question);
                 $em->flush();
                 $this->addFlash('success', "Votre question a été ajoutée!");
-                return $this->render('part_fp/profil_prof.html.twig');
+                return $this->redirectToRoute('app_profil');
             } else {
                 $this->addFlash('error', "Il faut une seule bonne réponse pour que la question soit validée!!");
             }

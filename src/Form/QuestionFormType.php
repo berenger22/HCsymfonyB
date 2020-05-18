@@ -20,11 +20,18 @@ class QuestionFormType extends AbstractType
         $builder
             ->add('domaine', EntityType::class, [
                 'class' => Domaine::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => '{{domaine.logo}}'
+                    ]
             ])
             ->add('intitule', TextareaType::class)
-            ->add('description', TextareaType::class)
-            ->add('justification', TextareaType::class)
+            ->add('description', TextareaType::class,[
+                'required' => false
+            ])
+            ->add('justification', TextareaType::class,[
+                'required' => false
+            ])
             ->add('reponses', CollectionType::class, [
                 'entry_type' => ReponseFormType::class,
                 'by_reference' => false,
