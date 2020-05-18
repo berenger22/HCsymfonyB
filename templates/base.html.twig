@@ -8,54 +8,44 @@
 		</title>
 		<link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
 		<link rel="stylesheet" href="{{asset('css/style.css')}}"> {% block stylesheets %}{% endblock %}
-		</head>
-		<body class="bg-primary">
-			<div class="container" id="pointeur">
-				<div class="row">
-					<div class="col">
-						<a href="#aide" id="info" class="btn btn-info m-5">Règles du jeu</a>
-						<div class="modal modal-content" id="aide">
-							<div class="modal-header">
-								<h2 class="modal-title">Règle du jeu</h2>
-							</div>
-							<div class="modal-body">
-								<p id="texte">
-									Harry codeur est un jeu de combat basé sur vos connaisances informatiques.
-									<br>
-									Dans un premier temps, vous devez vous inscrire si cela n'est pas dejà fait.
-																																															                                      Une fois que vous serez connecter, vous ferez un combat face un formateur 
-																																															                                      concernant des questions sur l'informatique.
-									<br>
-									Il vous faudra 3 questions de bonne pour pouvoir vaincre votre adversaire.
-																																															                                      pour cela il faudra choisir une bonne réponse parmi 4 propostions.
-									<br>
-									A VOUS DE JOUER !!!
-								</p>
-							</div>
-							<div class="modal-footer">
-								<a class="btn btn-primary" href="#aide" rel="modal:close">Fermer</a>
-							</div>
-						</div>
-						<script>
-							$('#info').click(function (event) {
-event.preventDefault();
-$(this).modal({escapeClose: false, clickClose: false, showClose: false});
-});
-						</script>
-					</div>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<link
+		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
+	{# // <script type="text/javascript" src="../js/script.js"></script>#}
+	</head>
+	<body class="bg-primary">
+		<div class="container" id="pointeur">
+			<div class="row">
+				<div class="col">
+					<a class="btn btn-info m-5" onclick="reglement()">Règles du jeu</a>
 				</div>
-				<h1 class="monTitre"> {% block monTitre %}{% endblock %}
-					</h1>
-					<h2 class="sousTitre"> {% block sousTitre %}{% endblock %}
-						</h2>
-						{% block body %}{% endblock %}
-					</div>
-					<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-					<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-					<link
-					rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
-					{# // <script type="text/javascript" src="../js/script.js"></script>coucou #}
-					{% block javascripts %}{% endblock %}
-				</body>
-			</html>
+			</div>
+			<h1 class="monTitre"> {% block monTitre %}{% endblock %}
+				</h1>
+				<h2 class="sousTitre"> {% block sousTitre %}{% endblock %}
+					</h2>
+					{% block body %}{% endblock %}
+					<div id="popups" data-prototype="{% include '/combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
+				</div>
+				{% block javascripts %}{% endblock %}
+				<script>
+					function reglement() {
+var $popupHolder = $('#popups');
+var index = $popupHolder.children().length;
+var newPopup = $popupHolder.data('prototype');
+newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+newPopup = newPopup.replace(/__title__/g, 'Règles du jeu');
+newPopup = newPopup.replace(/__content__/g, "Harry codeur est un jeu de combat basé sur vos connaisances informatiques.<br> \
+Dans un premier temps, vous devez vous inscrire si cela n'est pas dejà fait. <br> \
+Il vous faudra 3 questions de bonne pour pouvoir vaincre votre adversaire.<br> \
+A VOUS DE JOUER !!!");
+newPopup = newPopup.replace(/__type__/g, 'secondary');
+$popupHolder.append(newPopup);
+$('#popup_' + index + '_button').addClass("d-none");
+$('#popup_' + index + '_button').click();
+}
+				</script>
+			</body>
+		</html>

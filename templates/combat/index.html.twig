@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container" style="height: 100vh; display: flex; flex-direction: column;">
-        <div class="row" style="flex-basis: 70%; background-image: url(/images/darklight.png); background-size: 100% 100%;">
+        <div class="row" style="flex-basis: 60%; background-image: url(/images/darklight.png); background-size: 100% 100%;">
             <div class="col col-md-6 col-lg-6 col-xl-6" style="display: flex; flex-direction: column;">
                 <div class="col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-direction: column; flex-basis: 35%;">
                     <div style="flex-basis: 30%;"></div>
@@ -12,7 +12,7 @@
                         <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
                             <div style="flex-basis: 40%;" class="col-md-12 col-lg-12 col-xl-12" ></div>
                             <span id="professeur_id" class="d-none">{{ professeur.id }}</span>
-                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h2 id="professeur_name">{{ professeur.firstname }} {{ professeur.lastname }}</h2></div>
+                            <div style="flex-basis: 60%;" class="col-md-12 col-lg-12 col-xl-12" ><h2 id="professeur_name">{{ professeur.firstname |u.truncate(8) ~ " " ~ professeur.lastname |u.truncate(8) }}</h2></div>
                         </div>
                         <div style="display:flex; flex-direction: column; flex-basis: 50%;" class="col-md-12 col-lg-12 col-xl-12" >
                             <div style="display: flex; align-items: center; background-color: #444444; border-radius: 30% 30%; flex-basis: 60%;" class="row col-md-10 col-lg-10 col-xl-10 offset-md-2 offset-lg-2 offset-xl-2" >
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="flex-basis: 30%; background-color: #222222;">
+        <div class="row" style="flex-basis: 40%; background-color: #222222;">
             <div class="col col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 rounded" style="display: flex; flex-direction: column; padding-right:0; padding-left:0;">
                 <div id="question" class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-basis: 20%; background-color: white; border: 0.5rem ridge orange; padding-right:0; padding-left:0; justify-content:space-between; align-items: center;" data-prototype="{% include '/combat/question.html.twig' with {'data': {'id': '__id__', 'intitule': '__intitule__', 'description': '__description__', 'domaine_logo': '__domaine_logo__'} } only %}">
                 </div>
