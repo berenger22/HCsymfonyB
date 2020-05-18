@@ -106,6 +106,7 @@
                 newPopup = newPopup.replace(/__content__/g, $data);
                 newPopup = newPopup.replace(/__type__/g, 'success');
                 $popupHolder.append(newPopup);
+				$('#popup_' + index + '_button').addClass("d-none");
 				$('#popup_' + index + '_button').click()
 				});}
 	</script>
