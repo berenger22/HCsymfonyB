@@ -142,10 +142,10 @@
 
             </svg>
             <div id="shoe_left"
-                data-prototype="<img class='shoe-left' style='animation: fade 6s 0s ease-in-out; width: 30px; heigth: auto;' src='/images/piedg2.png'/>">
+                data-prototype="<img class='shoe-left' style='animation: fade 3s 0s ease-in-out; width: 30px; heigth: auto;' src='/images/piedg2.png'/>">
             </div>
             <div id="shoe_right"
-                data-prototype="<img class='shoe-right' style='animation: fade 6s 0s ease-in-out; width: 30px; heigth: auto;' src='/images/piedd2.png'/>">
+                data-prototype="<img class='shoe-right' style='animation: fade 3s 0s ease-in-out; width: 30px; heigth: auto;' src='/images/piedd2.png'/>">
             </div>
         </div>
     </div>
@@ -259,7 +259,7 @@
                     $('#main').css({ 'animation': 'circle 3s forwards' });
                     setTimeout(() => { window.location.href = "{{path('combat', {'id' : professeur.id})}}" }, 4000);
                 }
-            }, 200);
+            }, 100);
         }
 
         animationTimer = animationHandler(0);
@@ -285,7 +285,7 @@
             var $shoe = $holder.children().last();
             $shoe.offset($paths[6 - cpt % 2].mover.offset());
             $shoe.css("transform", "rotate(" + rotation + "deg)");
-        }, 600);
+        }, 300);
 
     </script>
 </body>
