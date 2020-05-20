@@ -12,6 +12,7 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<script src="https://kit.fontawesome.com/883b922560.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
 	</head>
 	<body class="bg-primary">
@@ -28,7 +29,7 @@
 					{% block body %}{% endblock %}
 					<div id="popups" data-prototype="{% include '/combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
 				</div>
-				{% block javascripts %}{% endblock %}
+				
 				<script>
 					function reglement() {
 var $popupHolder = $('#popups');
@@ -46,5 +47,6 @@ $('#popup_' + index + '_button').addClass("d-none");
 $('#popup_' + index + '_button').click();
 }
 				</script>
+				{% block javascripts %}{% endblock %}
 			</body>
 		</html>

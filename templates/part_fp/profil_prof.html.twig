@@ -39,7 +39,11 @@
 					<th scope="col">Question</th>
 					<th scope="col"></th>
 					<th scope="col"></th>
-					<th scope="col"></th>
+					<th scope="col">
+						<a class="btn btn-info" onclick="aide()">
+							<i class="far fa-question-circle"> Besoin d'aide?</i>
+						</a>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -92,6 +96,21 @@ $popupHolder.append(newPopup);
 $('#popup_' + index + '_button').addClass("d-none");
 $('#popup_' + index + '_button').click()
 });
-}
+};
+		function aide() {
+var $popupHolder = $('#popups');
+var index = $popupHolder.children().length;
+var newPopup = $popupHolder.data('prototype');
+newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+newPopup = newPopup.replace(/__title__/g, 'La navigation?');
+newPopup = newPopup.replace(/__content__/g, "A quoi servent tous ces boutons?<br> \
+\"Jouer\" vous permet de lancer un combat contre un professeur aléatoire.<br> \
+\"Modifier votre profil\"  vous permet d'accéder à la page de modification de vos informations personnelles.<br> \
+\"Mes questions\" Vous permet d'accéder à votre page profil qui liste toutes vos questions déjà créer et donne accès à la page de création de questions. <br>");
+newPopup = newPopup.replace(/__type__/g, 'secondary');
+$popupHolder.append(newPopup);
+$('#popup_' + index + '_button').addClass("d-none");
+$('#popup_' + index + '_button').click();
+};
 	</script>
 {% endblock %}

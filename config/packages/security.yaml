@@ -48,7 +48,7 @@ security:
          - { path: '^/question/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
          - { path: '^/profil', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
          - { path: '^/maraudeur', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
-         - { path: '^//combat/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
+         - { path: '^/combat/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
          - { path: '^/get/question/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
          - { path: '^/post/question', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
 

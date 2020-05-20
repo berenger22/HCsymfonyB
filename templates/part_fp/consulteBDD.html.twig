@@ -101,7 +101,9 @@
 	<a href="{{path('chemin')}}" class="btn btn-warning m">Retour</a>
 {% endblock %}
 {% block javascripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
+
 	function show(id){
         var $url = "/detail" +"/"+ id;
         $.get($url, function ($data) {

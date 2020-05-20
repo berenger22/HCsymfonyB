@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Harry Codeur{% endblock %}
-
-{% block monTitre %}Harry codeur{% endblock %}
-{% block sousTitre %}Les requetes de la mort{% endblock %}
 {% block body %}
 {% for message in app.flashes('error') %}
 <div class="alert alert-danger">
@@ -13,6 +10,9 @@
     <div class="justify-content-around" id="block">
         <div class="">
             <h4 class="">Votre question :</h4>
+            <a class="btn btn-info" onclick="aideQ()">
+				<i class="far fa-question-circle"> Les règles pour créer une question?</i>
+			</a>
         </div>
         <div class="" id="formulaire">
             {{ form_start(form) }}
@@ -26,7 +26,7 @@
             {{ form_end(form) }}
         </div>  
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {# // <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> #}
     <script type="text/javascript">
         $(document).ready(function () {
             var $container = $('div#question_form_reponses');
@@ -61,6 +61,20 @@
 
         });
 
-
+		function aideQ() {
+var $popupHolder = $('#popups');
+var index = $popupHolder.children().length;
+var newPopup = $popupHolder.data('prototype');
+newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+newPopup = newPopup.replace(/__title__/g, 'La navigation?');
+newPopup = newPopup.replace(/__content__/g, "A quoi servent tous ces boutons?<br> \
+\"Jouer\" vous permet de lancer un combat contre un professeur aléatoire.<br> \
+\"Modifier votre profil\"  vous permet d'accéder à la page de modification de vos informations personnelles.<br> \
+\"Mes questions\" Vous permet d'accéder à votre page profil qui liste toutes vos questions déjà créer et donne accès à la page de création de questions. <br>");
+newPopup = newPopup.replace(/__type__/g, 'secondary');
+$popupHolder.append(newPopup);
+$('#popup_' + index + '_button').addClass("d-none");
+$('#popup_' + index + '_button').click();
+};
     </script>
 {% endblock %}
