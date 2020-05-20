@@ -37,19 +37,19 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: '^/inscriptionProf', roles: ROLE_SUPER_ADMIN}
-         - { path: '^/editS/{id}', roles: ROLE_SUPER_ADMIN}
+         - { path: '^/editS', roles: ROLE_SUPER_ADMIN}
          - { path: '^/domaine', roles: ROLE_SUPER_ADMIN}
          - { path: '^/consulteBDD', roles: ROLE_SUPER_ADMIN}
-         - { path: '^/editJ/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
-         - { path: '^/editP/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_USER]}
+         - { path: '^/editJ', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
+         - { path: '^/editP', roles: [ROLE_SUPER_ADMIN,ROLE_USER]}
          - { path: '^/chemin', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
          - { path: '^/question', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
          - { path: '^/question/{id}/edit', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
          - { path: '^/question/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
          - { path: '^/profil', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN]}
          - { path: '^/maraudeur', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
-         - { path: '^/combat/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
-         - { path: '^/get/question/{id}', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
+         - { path: '^/combat', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
+         - { path: '^/get/question', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
          - { path: '^/post/question', roles: [ROLE_SUPER_ADMIN,ROLE_ADMIN,ROLE_USER]}
 
          - { path: ^/admin, roles: ROLE_ADMIN }
