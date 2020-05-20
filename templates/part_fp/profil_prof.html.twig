@@ -76,7 +76,7 @@
 	</div>
 	<div class="row justify-content-end mr-5" id="pop-up">
 		<a class="btn btn-warning " href="{{ path('chemin') }}">Retour</a>
-		<a class="btn btn-warning ml-5" href="{{ path('app_question') }}">Enregistrer votre question</a>
+		<a class="btn btn-warning ml-5" href="{{ path('app_question') }}">Créer une nouvelle question</a>
 	</div>
 	<div id="popups" data-prototype="{% include '/combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
 {% endblock %}
@@ -102,11 +102,11 @@ var $popupHolder = $('#popups');
 var index = $popupHolder.children().length;
 var newPopup = $popupHolder.data('prototype');
 newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
-newPopup = newPopup.replace(/__title__/g, 'La navigation?');
-newPopup = newPopup.replace(/__content__/g, "A quoi servent tous ces boutons?<br> \
-\"Jouer\" vous permet de lancer un combat contre un professeur aléatoire.<br> \
-\"Modifier votre profil\"  vous permet d'accéder à la page de modification de vos informations personnelles.<br> \
-\"Mes questions\" Vous permet d'accéder à votre page profil qui liste toutes vos questions déjà créer et donne accès à la page de création de questions. <br>");
+newPopup = newPopup.replace(/__title__/g, 'Votre profil');
+newPopup = newPopup.replace(/__content__/g, "A quoi correspond cette page?<br> \
+Cette page vous permet de visualiser toutes vos questions!<br> \
+\"Détail\"  vous permet d'afficher la question ainsi que les réponses proposées<br> \
+\"Créer une nouvelle question\" Vous permet d'accéder à la page de création de questions. <br>");
 newPopup = newPopup.replace(/__type__/g, 'secondary');
 $popupHolder.append(newPopup);
 $('#popup_' + index + '_button').addClass("d-none");
