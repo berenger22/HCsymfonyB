@@ -8,6 +8,7 @@ use App\Entity\Utilisateur;
 use App\Form\InscriptionType;
 use App\Entity\SuperUtilisateur;
 use App\Form\ProfesseurFormType;
+use App\Form\ProfSFormType;
 use App\Form\SuperUtilisateurFormType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -78,12 +79,15 @@ class ConnexionController extends AbstractController
 
     /**
     * @Route("/inscriptionProf", name="inscription_prof")
+    * @Route("/inscriptionProf/{id}", name="modif_prof",  methods="GET|POST")
     */
-    public function formulaireProf(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
+    public function formulaireProf(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder, Professeur $professeur)
     {
 
-        $professeur = new Professeur();
-        $form = $this->createForm(ProfesseurFormType::class,$professeur);
+        if(!$professeur){
+            $professeur = new Professeur();
+        }
+        $form = $this->createForm(ProfSFormType::class,$professeur);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $passwordCrypte = $encoder->encodePassword($professeur, $professeur->getPassword());

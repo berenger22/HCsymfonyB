@@ -7,11 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProfesseurFormType extends InscriptionType
+class ProfSFormType extends InscriptionType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+        $builder->add('avatar');
     }
 
     public function configureOptions(OptionsResolver $resolver)

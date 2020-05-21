@@ -37,7 +37,7 @@
 						</td>
 					{% elseif utilisateur.roles|join == 'ROLE_ADMIN'%}
 						<td>
-							<a href="{{path('app_editP', {'id' : utilisateur.id})}}" class="btn btn-link">Modifier profil</a>
+							<a href="{{path('modif_prof', {'id' : utilisateur.id})}}" class="btn btn-link">Modifier profil</a>
 						</td>
 						<td>
 							<form method="POST" action="{{ path('app_remove_professeur', { 'id':utilisateur.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce professeur?')">
