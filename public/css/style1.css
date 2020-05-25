@@ -35,3 +35,8 @@
 #pointeur {
     cursor: url(../images/cursor.png) 2 2, auto;
 }
+#info{
+   
+	border-radius:50%;
+	border:none;
+}

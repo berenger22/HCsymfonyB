@@ -21,6 +21,17 @@
 				<div class="col">
 					<a class="btn btn-info m-5" onclick="reglement()">Règles du jeu</a>
 				</div>
+				<div>
+					{% if (is_granted ('ROLE_ADMIN')) and (is_granted ('ROLE_SUPER_ADMIN') == false) %}
+			<a id="info" class="btn btn-info m-5" onclick="cheminP()">
+				<i style="text-align: center;" class="fas fa-question fa-3x"></i>
+			</a>
+		{% elseif (is_granted ('ROLE_USER')) and (is_granted ('ROLE_SUPER_ADMIN') == false) and (is_granted ('ROLE_ADMIN') == false) %}
+			<a id="info" class="btn btn-info m-5" onclick="cheminJ()">
+				<i style="text-align: center;" class="fas fa-question fa-3x"></i>
+			</a>
+		{% endif %}
+				</div>
 			</div>
 			<h1 class="monTitre"> {% block monTitre %}{% endblock %}
 				</h1>
@@ -30,8 +41,8 @@
 					<div id="popups" data-prototype="{% include '/combat/popup.html.twig' with {'data':{'id':'__id__','title':'__title__','content':'__content__'}, 'type':'__type__'} only %}"></div>
 				</div>
 				
-				<script>
-					function reglement() {
+<script>
+function reglement() {
 var $popupHolder = $('#popups');
 var index = $popupHolder.children().length;
 var newPopup = $popupHolder.data('prototype');
@@ -46,7 +57,37 @@ $popupHolder.append(newPopup);
 $('#popup_' + index + '_button').addClass("d-none");
 $('#popup_' + index + '_button').click();
 }
-				</script>
-				{% block javascripts %}{% endblock %}
-			</body>
-		</html>
+function cheminJ() {
+var $popupHolder = $('#popups');
+var index = $popupHolder.children().length;
+var newPopup = $popupHolder.data('prototype');
+newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+newPopup = newPopup.replace(/__title__/g, 'La navigation?');
+newPopup = newPopup.replace(/__content__/g, "A quoi servent tous ces boutons?<br> \
+\"Jouer\" vous permet de lancer un combat contre un professeur aléatoire.<br> \
+\"Modifier votre profil\" permet d'accéder à la page de modification de vos informations personnelles.");
+newPopup = newPopup.replace(/__type__/g, 'secondary');
+$popupHolder.append(newPopup);
+$('#popup_' + index + '_button').addClass("d-none");
+$('#popup_' + index + '_button').click();
+};
+		function cheminP() {
+var $popupHolder = $('#popups');
+var index = $popupHolder.children().length;
+var newPopup = $popupHolder.data('prototype');
+newPopup = newPopup.replace(/__id__/g, 'popup_' + index);
+newPopup = newPopup.replace(/__title__/g, 'La navigation?');
+newPopup = newPopup.replace(/__content__/g, "A quoi servent tous ces boutons?<br> \
+\"Jouer\" vous permet de lancer un combat contre un professeur aléatoire.<br> \
+\"Modifier votre profil\"  vous permet d'accéder à la page de modification de vos informations personnelles.<br> \
+\"Mes questions\" Vous permet d'accéder à votre page profil qui liste toutes vos questions déjà créer et donne accès à la page de création de questions. <br>");
+newPopup = newPopup.replace(/__type__/g, 'secondary');
+$popupHolder.append(newPopup);
+$('#popup_' + index + '_button').addClass("d-none");
+$('#popup_' + index + '_button').click();
+};
+</script>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>
