@@ -81,7 +81,7 @@ class ConnexionController extends AbstractController
     * @Route("/inscriptionProf", name="inscription_prof")
     * @Route("/inscriptionProf/{id}", name="modif_prof",  methods="GET|POST")
     */
-    public function formulaireProf(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder, Professeur $professeur)
+    public function formulaireProf(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder, Professeur $professeur = null)
     {
 
         if(!$professeur){
