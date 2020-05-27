@@ -21,10 +21,7 @@ class PartFPController extends AbstractController
     public function création(Request $request, UserInterface $user)
     {
         $em = $this->getDoctrine()->getManager();
-
         $question = new Question();
-
-
         $formQuestion = $this->createForm(QuestionFormType::class, $question);
         $formQuestion->handleRequest($request);
 
@@ -60,15 +57,11 @@ class PartFPController extends AbstractController
 
         $em = $this->getDoctrine()
             ->getManager();
-
         $question = $em->getRepository(Question::class)
             ->find($id);
-
         $form = $this->createForm(QuestionFormType::class, $question);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $i = 0;
             $reponses = $question->getReponses();
             foreach ($reponses as $reponse) {
@@ -76,18 +69,15 @@ class PartFPController extends AbstractController
                     $i = $i + 1;
                 }
             }
-
             if ($i == 1) {
                 $em->persist($question);
                 $em->flush();
                 $this->addFlash('success', "Votre question a été ajoutée!");
-
                 return $this->redirectToRoute('app_profil');
             } else {
                 $this->addFlash('error', "Il faut une seule bonne réponse pour que la question soit validée!!");
             }
         }
-
         return $this->render('part_fp/question_reponse.html.twig', [
             'form' => $form->createView()
         ]);
@@ -99,16 +89,12 @@ class PartFPController extends AbstractController
      */
     public function remove(Request $request, Question $question)
     {
-
         if ($this->isCsrfTokenValid('remove' . $question->getId(), $request->request->get('_token'))) {
 
-            $em = $this->getDoctrine()
-                ->getManager();
-
+            $em = $this->getDoctrine()->getManager();
             $em->remove($question);
             $em->flush();
         }
-
         return $this->redirectToRoute('app_profil');
     }
     /**
@@ -135,34 +121,30 @@ class PartFPController extends AbstractController
     {
 
         $em = $this->getDoctrine()->getManager();
-
         $domaine = new Domaine();
         $form = $this->createForm(DomainFormType::class, $domaine);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em->persist($domaine);
             $em->flush();
-
-            return $this->render('part_fp/domaine.html.twig', [
-                'form' => $form->createView()
-            ]);
+            $this->addFlash('success', "Vous avez ajouté un domaine");
+            return $this->redirectToRoute('app_domaine');
         }
         return $this->render('part_fp/domaine.html.twig', [
             'form' => $form->createView()
         ]);
     }
+
     /**
      * @Route("/detail/{id}", name="detail")
      */
     public function detail(Request $request, Question $question)
     {
-
         return $this->render('part_fp/detail.html.twig', [
             'question' => $question
         ]);
     }
+
     /**
      * @Route("/visible/{id}", name="app_visible")
      */

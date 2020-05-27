@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Professeur;
+use App\Entity\Domaine;
 use App\Entity\Question;
+use App\Entity\Professeur;
 use App\Entity\Utilisateur;
+use App\Form\ProfSFormType;
 use App\Form\InscriptionType;
 use App\Entity\SuperUtilisateur;
 use App\Form\ProfesseurFormType;
-use App\Form\ProfSFormType;
+use App\Repository\DomaineRepository;
 use App\Form\SuperUtilisateurFormType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -104,7 +106,7 @@ class ConnexionController extends AbstractController
     }
 
     /**
-    * @Route("/test", name="inscription_test")
+    * @Route("/formulaireSuperNous", name="inscription_test")
     */
     public function formulaireSuper(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
     {
@@ -187,14 +189,16 @@ class ConnexionController extends AbstractController
     /**
      * @Route("/consulteBDD", name="consulteBDD")
      */
-    public function consulteBDD(UtilisateurRepository $repo, QuestionRepository $repoq)
+    public function consulteBDD(UtilisateurRepository $repo, QuestionRepository $repoq, DomaineRepository $repoD)
     {   
         $utilisateurs = $repo->findAll();
         $questions = $repoq->findAll();
+        $domaines = $repoD->findAll();
 
         return $this->render('part_fp/consulteBDD.html.twig',[
             'utilisateurs' => $utilisateurs,
-            'questions' => $questions
+            'questions' => $questions,
+            'domaines' => $domaines
         ]);
     }
         /**
@@ -246,6 +250,24 @@ class ConnexionController extends AbstractController
                 ->getManager();
 
             $em->remove($question);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('consulteBDD');
+    }
+    /**
+     * @Route("/domaine/{id}",name="app_remove_domaine", methods={"DELETE"},
+     * requirements={"id"="\d+"})
+     */
+    public function removeD(Request $request, Domaine $domaine)
+    {
+
+        if ($this->isCsrfTokenValid('remove' . $domaine->getId(), $request->request->get('_token'))) {
+
+            $em = $this->getDoctrine()
+                ->getManager();
+
+            $em->remove($domaine);
             $em->flush();
         }
 

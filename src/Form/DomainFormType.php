@@ -14,10 +14,6 @@ class DomainFormType extends AbstractType {
         $builder
         ->add('name')
         ->add('logo')
-        ->add('Suivant', SubmitType::class, [
-        'attr' => [
-        'class' => 'btn btn-danger'
-        ]])
         ;
     }
 
