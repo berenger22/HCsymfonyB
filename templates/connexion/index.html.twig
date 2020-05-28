@@ -41,10 +41,8 @@ $(document).ready(function() {
 document.onmousemove = suitsouris;
 
 function suitsouris(evenement) {
-    if (navigator.appName) {
         var x = event.x + document.body.scrollLeft;
         var y = event.y + document.body.scrollTop;
-    }
 
     document.getElementById("image_suit_souris").style.left = (x - 200) + 'px';
     document.getElementById("image_suit_souris").style.top = (y + 1) + 'px';
