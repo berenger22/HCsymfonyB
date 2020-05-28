@@ -5,6 +5,11 @@
 {% block monTitre %}Harry codeur{% endblock %}
 {% block sousTitre %}Les requetes de la mort{% endblock %}
 {% block body %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endfor %}
 {{form_start(form)}}
 
     {{ form_row(form.name)}}

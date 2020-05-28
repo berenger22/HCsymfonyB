@@ -103,11 +103,6 @@ class PartFPController extends AbstractController
 
     public function profil(Request $request, UserInterface $user)
     {
-        // dump($user);
-        //        $em = $this->getDoctrine()->getManager();    
-        //        $listeQuestions = $em
-        //                ->getRepository(Question::Class)
-        //                ->findBy($idProfesseur);
         $listeQuestions = $user->getQuestions();
         return $this->render('part_fp/profil_prof.html.twig', [
             'listeQuestions' => $listeQuestions
