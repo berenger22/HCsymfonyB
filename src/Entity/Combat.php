@@ -2,11 +2,28 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 class Combat {
 
+    /**
+     * @Groups({"attribute"})
+     */
     private $lifePoints;
+
+    /**
+     * @Groups({"attribute"})
+     */
     private $opponentLifePoints;
+
+    /**
+     * @Groups({"attribute"})
+     */
     private $questionsCorrectes;
+
+    /**
+     * @Groups({"attribute"})
+     */
     private $questionsIncorrectes;
 
     function __construct() {
